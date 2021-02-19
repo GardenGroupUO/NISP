@@ -6,5 +6,5 @@ Counter.py
 
 This class acts like a Integer and allows one to add to the counter. 
 
-.. automodule:: NISP.Counter.Counter
+.. automodule:: NISP.NISP.Counter.Counter
 	:members:

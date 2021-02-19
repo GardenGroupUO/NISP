@@ -31,7 +31,7 @@ def find_packages(root):
 
 def find_scripts():
   scripts = []
-  scripts_folders = [] #['Subsidiary_Programs','Postprocessing_Programs','Helpful_Programs']
+  scripts_folders = ['Subsidiary_Programs'] #['Subsidiary_Programs','Postprocessing_Programs','Helpful_Programs']
   for scripts_folder in scripts_folders:
     for root, dirs, files in os.walk('NISP/'+scripts_folder, topdown=False):
       for file in files:

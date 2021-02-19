@@ -4,5 +4,5 @@
 Cluster.py
 ==========
 
-.. automodule:: NISP.Cluster.Cluster
+.. automodule:: NISP.NISP.Cluster.Cluster
 	:members:

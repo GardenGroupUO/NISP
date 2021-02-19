@@ -11,5 +11,5 @@ __license__ = 'GNU AFFERO GENERAL PUBLIC LICENSE'
 __url__ = 'https://github.com/GardenGroupUO/NIS'
 __doc__ = 'See https://nanois.readthedocs.io/en/latest/ for the documentation on this program'
 
-from NISP.Run_Interpolation_Scheme import Run_Interpolation_Scheme 
+from NISP.NISP.Run_Interpolation_Scheme import Run_Interpolation_Scheme 
 __all__ = ['Run_Interpolation_Scheme']

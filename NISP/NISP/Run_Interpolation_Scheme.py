@@ -13,17 +13,19 @@ print('Loading matplotlib')
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 print('Loading nanocluster modules')
-from NISP.Cluster import get_cluster, Cluster
+from NISP.NISP.Cluster import get_cluster, Cluster
 print('Loading the interpolation rules')
-from NISP.Interpolation_rules import Rule_deca_reent, Rule_deca_plane, Rule_deca_111
-from NISP.Interpolation_rules import Rule_octa_111, Rule_octa_fcc
-from NISP.Interpolation_rules import Rule_ico
+from NISP.NISP.Interpolation_rules import Rule_deca_reent, Rule_deca_plane, Rule_deca_111
+from NISP.NISP.Interpolation_rules import Rule_octa_111, Rule_octa_fcc
+from NISP.NISP.Interpolation_rules import Rule_ico
 print('Loading Connection modules')
-from NISP.Interpolation_Connection import make_connection
+from NISP.NISP.Interpolation_Connection import make_connection
 print('Loading icosahedral, decahedral, and octahedral methods')
-from NISP.motif_methods import no_of_atoms_to_make_ico
-from NISP.motif_methods import no_of_atoms_to_make_deca
-from NISP.motif_methods import no_of_atoms_to_make_octa
+from NISP.NISP.motif_methods import no_of_atoms_to_make_ico
+from NISP.NISP.motif_methods import no_of_atoms_to_make_deca
+from NISP.NISP.motif_methods import no_of_atoms_to_make_octa
+print('Loading methods for manual mode')
+from NISP.NISP.Manual_Mode import write_files_for_manual_mode
 print('Loading os, timing, and multiprocessing modules')
 import os, time
 import multiprocessing as mp
@@ -54,13 +56,16 @@ class Run_Interpolation_Scheme:
 		self.element = self.input_information['Element Type']
 		self.e_coh = self.input_information['Cohesive Energy']
 		self.maximum_size = self.input_information['Maximum No. of Atoms']
-		self.local_optimiser = self.input_information['Local Optimiser']
+		self.local_optimiser = check_value('Local Optimiser',self.input_information,None)
+		self.manual_mode = check_value('Manual Mode',self.input_information,False)
 		self.no_of_cpus = no_of_cpus
 		self.filename_prefix = filename_prefix
 		if self.filename_prefix == '':
 			self.filename_prefix = str(self.element) + '_Max_Size_' + str(self.maximum_size)
-		results_file_suffix = '_atoms_interpolation_scheme_results_file.txt'
-		self.input_information_file = self.filename_prefix + results_file_suffix
+		input_file_suffix = '_atoms_interpolation_scheme_input_file.txt'
+		results_file_suffix = '_atoms_interpolation_scheme_input_file.txt'
+		self.input_information_file    = self.filename_prefix + input_file_suffix
+		self.delta_energy_results_file = self.filename_prefix + results_file_suffix
 
 	def setup_for_running_interpolation(self,output_information,filename_prefix):
 		self.output_information = output_information
@@ -85,18 +90,28 @@ class Run_Interpolation_Scheme:
 		# -----------------------------------------------------------------
 
 	# ------------------------------------------------------------------------------------------------------------------------------
+	# The following def will write all the files that you need for manual mode
+
+	def write_manual_files(self):
+		write_files_for_manual_mode(self.element,self.e_coh,self.maximum_size,self.manual_mode,self.input_information_file)
+
+	# ------------------------------------------------------------------------------------------------------------------------------
 	# The following defs are for obtaining the delta energies of all combinations of icosahedral, decahedral and octahedral clusters 
 
 	def get_input_data(self):
-		if os.path.exists(self.input_information_file):
-			self.input_from_file(self.input_information_file)
+		if os.path.exists(self.delta_energy_results_file):
+			self.input_from_file(self.delta_energy_results_file,False)
+		elif self.manual_mode and os.path.exists(self.input_information_file):
+			self.input_from_file(self.input_information_file,   True)
+		elif not (self.manual_mode in [False,'F','f','false','FALSE','False']):
+			self.write_manual_files()
 		else:
 			self.input_with_calculator()
 
 	def input_with_calculator(self):
-		self.ico_data, self.magic_numbers = self.Get_Energies_Of_Icosahedrons()
-		self.octa_data, self.octa_magic   = self.Get_Energies_Of_Octahedrals()
-		self.deca_data, self.deca_magic   = self.Get_Energies_Of_Decahedrals()
+		self.ico_data,  self.magic_numbers = self.Get_Energies_Of_Icosahedrons()
+		self.octa_data, self.octa_magic    = self.Get_Energies_Of_Octahedrals()
+		self.deca_data, self.deca_magic    = self.Get_Energies_Of_Decahedrals()
 		
 	# This will obtain all the delta energies of all the icosahedral clusters that can be made with a cluster number less than 
 	# an atom size of maximum_size. 
@@ -246,16 +261,25 @@ class Run_Interpolation_Scheme:
 
 
 
-	def input_from_file(self,input_file):
+	def input_from_file(self,input_file,manual_mode_file_found):
 		print('--------------------------------------------------')
-		print('Found the file called '+str(input_file))
-		print('This file was made from the first time you ran the interpolation scheme')
-		print()
-		print('This file contained all the information required to perform the interpolation scheme')
-		print('It contains:')
-		print('\t* The various perfect closed shell icosahedral, decahedral, and octahedral clusters.')
-		print('\t* The parameters used to make those clusters')
-		print('\t* The delta energy of the cluster with your chosen potential')
+		if manual_mode_file_found:
+			print('Found the file called '+str(input_file))
+			print('This file was made because you want to run NISP in manual mode')
+			print()
+			print('To be used, it needs to contain:')
+			print('\t* The various perfect closed shell icosahedral, decahedral, and octahedral clusters.')
+			print('\t* The parameters used to make those clusters')
+			print('\t* You need to enter the energy of the clusters after these')
+		else:
+			print('Found the file called '+str(input_file))
+			print('This file was made from the first time you ran the interpolation scheme')
+			print()
+			print('This file contained all the information required to perform the interpolation scheme')
+			print('It contains:')
+			print('\t* The various perfect closed shell icosahedral, decahedral, and octahedral clusters.')
+			print('\t* The parameters used to make those clusters')
+			print('\t* The delta energy of the cluster with your chosen potential')
 		print('--------------------------------------------------')
 		self.ico_data  = []; self.magic_numbers = []
 		self.deca_data = []; self.deca_magic = []
@@ -266,8 +290,12 @@ class Run_Interpolation_Scheme:
 			text_details = file.readline()
 			self.element = text_details.split()[1]
 			self.maximum_size = int(text_details.split()[3])
+			if manual_mode_file_found:
+				file.readline()
 			file.readline()
+			line_count = 0
 			for line in file:
+				line_count += 1
 				if line == 'Icosahedron\n':
 					inputting = self.ico_data
 					motif_type = 'Icosahedron'
@@ -282,8 +310,28 @@ class Run_Interpolation_Scheme:
 					noAtoms = int(datum[0])
 					if noAtoms > self.maximum_size:
 						self.maximum_size = noAtoms
-					motif_details = eval('['+','.join(datum[1:-1])+']')
-					delta_energy = float(datum[-1].split('\n')[0])
+					try:
+						if motif_type == 'Icosahedron':
+							motif_details = [datum[1]]
+							delta_energy  = datum[2]
+						elif motif_type == 'Decahedron':
+							motif_details = [datum[1], datum[2], datum[3]]
+							delta_energy  = datum[4]
+						elif motif_type == 'Octahedron':
+							motif_details = [datum[1], datum[2]]
+							delta_energy  = datum[3]
+					except IndexError as exception_message:
+						if manual_mode_file_found:
+							tostring  = 'Error when inputting data from '+str(input_file)+'\n'
+							tostring += 'One of your entries in this file was not filled in completely\n'
+							tostring += 'Check line '+str(line_count)+' of '+str(input_file)+'\n'
+							tostring += 'and see if you have filled this in completely.\n'
+							tostring += exception_message
+							raise IndexError(tostring)
+						else:
+							raise IndexError(exception_message)
+					#motif_details = eval('['+','.join(datum[1:-1])+']')
+					#delta_energy = float(datum[-1].split('\n')[0])
 					cluster = Cluster(motif_type,motif_details,no_atoms=noAtoms,delta_energy=delta_energy)
 					inputting.append(cluster)
 		self.magic_numbers = [x.no_atoms for x in self.ico_data]
@@ -334,7 +382,7 @@ class Run_Interpolation_Scheme:
 		print('----------------------------------')
 
 	def output_to_file(self):
-		with open(self.input_information_file,'w') as file:
+		with open(self.delta_energy_results_file,'w') as file:
 			file.write('Element: '+str(self.element)+' Max_Size: '+str(self.maximum_size)+'\n')
 			file.write('------------------------------\n')
 			file.write('Icosahedron\n')
