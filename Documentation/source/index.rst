@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to the Nanocluster Interpolation Scheme Program (NISP) documentation!
-########################################################################################################################################
+#############################################################################
 
 .. raw:: html
     :file: Images/pypi_python_version.svg
@@ -35,7 +35,7 @@ Prof Hannes Jónsson: `english.hi.is/staff/hj <https://english.hi.is/staff/hj>`_
 
 **Click the Binder link below to try NISP out on the web! (The Binder page may load quickly or may take 1 or 2 minutes to load)**
 
-https://mybinder.org/v2/gh/GardenGroupUO/NISP_Jupyter_Examples/main?urlpath=lab
+https://mybinder.org/v2/gh/GardenGroupUO/NISP/main?urlpath=lab
 
 Table of Contents
 =================
@@ -43,9 +43,14 @@ Table of Contents
 .. toctree::
    :maxdepth: 2
 
+   How_NISP_Works
    Installation
    How_To_Run_NISP
    Local_Minimisation_Function
+   How_to_obtain_cohesive_energies
+   How_To_Manually_Enter_Energy_Results_Into_NISP
+   Examples_of_Running_NISP
+   NISP_Files
    genindex
    py-modindex
 

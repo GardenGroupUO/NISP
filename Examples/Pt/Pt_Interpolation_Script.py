@@ -7,15 +7,14 @@ input_information['Cohesive Energy'] = -5.89233884824
 input_information['Maximum No. of Atoms'] = 1000
 input_information['Local Optimiser'] = Minimisation_Function
 
-sizes_to_interpolate = [37,400]#[37,38,44,55,147,40,888,1399]
-
-plot_information = {}
-plot_information['Upper No of Atom Range']   = 450
-plot_information['Lower No of Atom Range']   = 350
-plot_information['Upper Delta Energy Range'] = None #2.8
-plot_information['Lower Delta Energy Range'] = None #2.2
+output_information = {}
+output_information['Upper No of Atom Range']   = 450
+output_information['Lower No of Atom Range']   = 350
+output_information['Upper Delta Energy Range'] = None #2.8
+output_information['Lower Delta Energy Range'] = None #2.2
+output_information['Size to Interpolate Over'] = [37,400]#[37,38,44,55,147,40,888,1399]
+output_information['Filename Prefix'] = ''
 
 no_of_cpus = 1
-filename = ''
 
-Run_Interpolation_Scheme(input_information=input_information,sizes_to_interpolate=sizes_to_interpolate,plot_information=plot_information,no_of_cpus=no_of_cpus,filename=filename)
+Run_Interpolation_Scheme(input_information=input_information,output_information=output_information,no_of_cpus=no_of_cpus)

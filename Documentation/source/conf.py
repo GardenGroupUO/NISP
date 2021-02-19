@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# The Garden Group Genetic Algorithm for Clusters documentation build configuration file, created by
+# The NISP documentation build configuration file, created by
 # sphinx-quickstart on Mon Oct  1 08:10:30 2018.
 #
 # This file is execfile()d with the current directory set to its
@@ -28,6 +28,8 @@ print('You are in '+str(os.getcwd()))
 #original_path = os.getcwd()
 #os.chdir('../../GA')
 #import pdb; pdb.set_trace()
+
+#from NISP import Run_Interpolation_Scheme 
 
 #import GA.Diversity_Schemes.CNA_Diversity_Scheme
 #import GA.Diversity_Schemes.Energy_Diversity_Scheme

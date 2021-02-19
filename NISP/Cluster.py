@@ -1,4 +1,5 @@
 
+
 def get_cluster(task):
 	motif, motif_details, element, local_optimiser, e_coh, no_atoms, no_of_tasks, counter = task
 	print('Starting '+str([motif, motif_details, element]))
@@ -29,16 +30,16 @@ class Cluster:
 	"""
 	This class is designed to hold all the information we need to record about clusters:
 	Inputs
-		(str) motif - the motif you want to get the number of atoms required to create it.
-		(list) motif_details - the information required for the motif of interest
-		(atoms) cluster - A cluster to sample
-		(int) no_atoms - the number of atoms in the cluster
-		(Calculator) calculator - The calculator to use 
-		(float) e_coh - The cohesive energy of the cluster
-		(float) delta_energy - The delta energy of the cluster.
-		(boolean) debug - Print any information to help us if we need to.
+	(str) motif - the motif you want to get the number of atoms required to create it.
+	(list) motif_details - the information required for the motif of interest
+	(atoms) cluster - A cluster to sample
+	(int) no_atoms - the number of atoms in the cluster
+	(Calculator) calculator - The calculator to use 
+	(float) e_coh - The cohesive energy of the cluster
+	(float) delta_energy - The delta energy of the cluster.
+	(boolean) debug - Print any information to help us if we need to.
 	Output
-		(int) noAtoms - the number of atoms required to make the cluster of interest
+	(int) noAtoms - the number of atoms required to make the cluster of interest
 	"""
 	def __init__(self,motif,motif_details,element=None,local_optimiser=None,e_coh=None,no_atoms=None,delta_energy=None,debug=False,get_energy=False):
 		if debug:

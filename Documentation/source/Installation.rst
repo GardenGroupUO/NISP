@@ -1,8 +1,8 @@
 
 .. _Installation:
 
-Installation: Setting Up the Organisms Program and Pre-Requisites Packages
-##########################################################################
+Installation: Setting Up NISP and Pre-Requisites Packages
+#########################################################
 
 In this article, we will look at how to install the genetic algorithm and all requisites for this program.
 

@@ -13,17 +13,17 @@ print('Loading matplotlib')
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 print('Loading nanocluster modules')
-from NanoIS.Cluster import get_cluster, Cluster
+from NISP.Cluster import get_cluster, Cluster
 print('Loading the interpolation rules')
-from NanoIS.Interpolation_rules import Rule_deca_reent, Rule_deca_plane, Rule_deca_111
-from NanoIS.Interpolation_rules import Rule_octa_111, Rule_octa_fcc
-from NanoIS.Interpolation_rules import Rule_ico
+from NISP.Interpolation_rules import Rule_deca_reent, Rule_deca_plane, Rule_deca_111
+from NISP.Interpolation_rules import Rule_octa_111, Rule_octa_fcc
+from NISP.Interpolation_rules import Rule_ico
 print('Loading Connection modules')
-from NanoIS.Interpolation_Connection import make_connection
+from NISP.Interpolation_Connection import make_connection
 print('Loading icosahedral, decahedral, and octahedral methods')
-from NanoIS.motif_methods import no_of_atoms_to_make_ico
-from NanoIS.motif_methods import no_of_atoms_to_make_deca
-from NanoIS.motif_methods import no_of_atoms_to_make_octa
+from NISP.motif_methods import no_of_atoms_to_make_ico
+from NISP.motif_methods import no_of_atoms_to_make_deca
+from NISP.motif_methods import no_of_atoms_to_make_octa
 print('Loading os, timing, and multiprocessing modules')
 import os, time
 import multiprocessing as mp
@@ -229,7 +229,7 @@ class Run_Interpolation_Scheme:
 			pool.join()
 			data = results.get()
 		else:
-			from NanoIS.Counter import Counter
+			from NISP.Counter import Counter
 			counter = Counter()
 			data = [get_cluster(task+(counter,)) for task in tasks]
 		return data
