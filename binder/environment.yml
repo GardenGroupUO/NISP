@@ -1,6 +1,7 @@
 # example from: https://github.com/jupyterlab/jupyterlab-demo
 channels:
 - conda-forge
+- gardengroupuo
 dependencies:
 # Jupyter
 - jupyterlab=2
@@ -36,3 +37,4 @@ dependencies:
 - scipy
 - matplotlib
 - ase=3.21.1
+- nisp
