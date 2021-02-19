@@ -3,7 +3,7 @@ if sys.version_info[0] == 2:
 	raise ImportError('The Nanocluster Interpolation Scheme requires Python3. This is Python2.')
 
 __name__    = 'The Nanocluster Interpolation Scheme (NISP)'
-__version__ = '1.3.0'
+__version__ = '1.3.1'
 __author__  = 'Geoffrey R. Weal, Dr. Anna L. Garden, Dr. Andreas Pedersen and Prof. Hannes Jónsson'
 
 __author_email__ = 'anna.garden@otago.ac.nz'

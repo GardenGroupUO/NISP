@@ -12,7 +12,7 @@ files_to_copy = os.listdir(VASP_Input_Files)
 
 cluster_folders = []
 for folder in os.listdir('.'):
-	if os.path.isdir('./'+folder) and (folder.startswith('Ico_') or folder.startswith('Deca_') or folder.startswith('Octa_'))
+	if os.path.isdir('./'+folder) and (folder.startswith('Ico_') or folder.startswith('Deca_') or folder.startswith('Octa_')):
 		cluster_folders.append(folder)
 
 for cluster_folder in cluster_folders:
