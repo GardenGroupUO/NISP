@@ -40,7 +40,7 @@ def write_files_for_manual_mode(element,e_coh,maximum_size,manual_mode,input_inf
 def write_start_of_manual_mode_file(element,maximum_size,input_information_file):
 	with open(input_information_file,'w') as input_file:
 		input_file.write('Element: '+str(element)+' Max_Size: '+str(maximum_size)+'\n')
-		input_file.write('Enter the energies of the clusters below (not the delta energies, NISP can do that for you later)'+'\n')
+		input_file.write('Enter the energies of the clusters below to the right most of each line (not the delta energies, NISP can do that for you later)'+'\n')
 		input_file.write('------------------------------'+'\n')
 
 def write_icosahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_suffix,input_information_file,folder):

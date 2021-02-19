@@ -1,0 +1,55 @@
+------------------------------------
+------------------------------------
+Icosahedral Interpolation
+motif: Icosahedron, type_of_connection: ico, Remove atoms from: 111 Facet, motif start details: [5], motif end details: [4], interpolation energy: 1.1023490466870087.
+Number of atoms to remove from ico [5]: 144
+------------------------------------
+------------------------------------
+Decahedral Interpolation
+motif: Decahedron, type_of_connection: deca_111, Remove atoms from: 111 Facet, motif start details: [2, 3, 2], motif end details: [2, 1, 2], interpolation energy: 1.0308616479337738.
+Number of atoms to remove from deca [2, 3, 2]: 103
+motif: Decahedron, type_of_connection: deca_111, Remove atoms from: 111 Facet, motif start details: [3, 4, 1], motif end details: [3, 2, 1], interpolation energy: 1.0353606789652052.
+Number of atoms to remove from deca [3, 4, 1]: 73
+motif: Decahedron, type_of_connection: deca_111, Remove atoms from: 111 Facet, motif start details: [3, 3, 1], motif end details: [3, 1, 1], interpolation energy: 1.0417657419713096.
+Number of atoms to remove from deca [3, 3, 1]: 27
+motif: Decahedron, type_of_connection: reent, Remove atoms from: 100 Facet or from Corners, motif start details: [4, 1, 1], motif end details: [2, 1, 2], interpolation energy: 1.0495259597306923.
+Number of atoms to remove from deca [4, 1, 1]: 11
+motif: Decahedron, type_of_connection: plane, Remove atoms from: 100 Facet or from Corners, motif start details: [4, 1, 1], motif end details: [5, 2, 0], interpolation energy: 1.0661771170832053.
+Number of atoms to remove from deca [4, 1, 1]: 11
+motif: Decahedron, type_of_connection: plane, Remove atoms from: 100 Facet or from Corners, motif start details: [3, 3, 1], motif end details: [4, 4, 0], interpolation energy: 1.07210831078548.
+Number of atoms to remove from deca [3, 3, 1]: 27
+motif: Decahedron, type_of_connection: deca_111, Remove atoms from: 111 Facet, motif start details: [5, 4, 0], motif end details: [5, 2, 0], interpolation energy: 1.0793513286672038.
+Number of atoms to remove from deca [5, 4, 0]: 93
+motif: Decahedron, type_of_connection: plane, Remove atoms from: 100 Facet or from Corners, motif start details: [6, 1, 0], motif end details: [5, 2, 0], interpolation energy: 1.0803635547608488.
+Number of atoms to remove from deca [6, 1, 0]: 16
+motif: Decahedron, type_of_connection: deca_111, Remove atoms from: 111 Facet, motif start details: [5, 3, 0], motif end details: [5, 1, 0], interpolation energy: 1.0814539328356263.
+Number of atoms to remove from deca [5, 3, 0]: 42
+motif: Decahedron, type_of_connection: plane, Remove atoms from: 100 Facet or from Corners, motif start details: [5, 3, 0], motif end details: [4, 4, 0], interpolation energy: 1.094198495176548.
+Number of atoms to remove from deca [5, 3, 0]: 42
+motif: Decahedron, type_of_connection: reent, Remove atoms from: 100 Facet or from Corners, motif start details: [4, 5, 0], motif end details: [2, 5, 1], interpolation energy: 1.1120713618056315.
+Number of atoms to remove from deca [4, 5, 0]: 13
+motif: Decahedron, type_of_connection: deca_111, Remove atoms from: 111 Facet, motif start details: [4, 5, 0], motif end details: [4, 3, 0], interpolation energy: 1.1157934996630747.
+Number of atoms to remove from deca [4, 5, 0]: 13
+motif: Decahedron, type_of_connection: deca_111, Remove atoms from: 111 Facet, motif start details: [4, 6, 0], motif end details: [4, 4, 0], interpolation energy: 1.1413208783273925.
+Number of atoms to remove from deca [4, 6, 0]: 44
+motif: Decahedron, type_of_connection: plane, Remove atoms from: 100 Facet or from Corners, motif start details: [4, 5, 0], motif end details: [3, 6, 0], interpolation energy: 1.1919759097353864.
+Number of atoms to remove from deca [4, 5, 0]: 13
+------------------------------------
+------------------------------------
+Octahedral Interpolation
+motif: Octahedron, type_of_connection: octa_111, Remove atoms from: 111 Facet, motif start details: [8, 2], motif end details: [6, 0], interpolation energy: 1.03445878049292.
+Number of atoms to remove from octa [8, 2]: 149
+motif: Octahedron, type_of_connection: octa_111, Remove atoms from: 111 Facet, motif start details: [8, 1], motif end details: [6, 0], interpolation energy: 1.0368449278315452.
+Number of atoms to remove from octa [8, 1]: 173
+motif: Octahedron, type_of_connection: octa_111, Remove atoms from: 111 Facet, motif start details: [7, 1], motif end details: [5, 0], interpolation energy: 1.0402904371490338.
+Number of atoms to remove from octa [7, 1]: 60
+motif: Octahedron, type_of_connection: octa_111, Remove atoms from: 111 Facet, motif start details: [7, 2], motif end details: [5, 0], interpolation energy: 1.042049642146266.
+Number of atoms to remove from octa [7, 2]: 36
+motif: Octahedron, type_of_connection: octa_111, Remove atoms from: 111 Facet, motif start details: [8, 3], motif end details: [6, 1], interpolation energy: 1.0421037464904053.
+Number of atoms to remove from octa [8, 3]: 95
+motif: Octahedron, type_of_connection: octa_111, Remove atoms from: 111 Facet, motif start details: [7, 0], motif end details: [6, 0], interpolation energy: 1.0456496024255508.
+Number of atoms to remove from octa [7, 0]: 66
+motif: Octahedron, type_of_connection: octa_fcc, Remove atoms from: 100 Facet, motif start details: [7, 2], motif end details: [7, 3], interpolation energy: 1.0756196956771438.
+Number of atoms to remove from octa [7, 2]: 36
+------------------------------------
+------------------------------------

@@ -62,8 +62,8 @@ class Run_Interpolation_Scheme:
 		self.filename_prefix = filename_prefix
 		if self.filename_prefix == '':
 			self.filename_prefix = str(self.element) + '_Max_Size_' + str(self.maximum_size)
-		input_file_suffix = '_atoms_interpolation_scheme_input_file.txt'
-		results_file_suffix = '_atoms_interpolation_scheme_input_file.txt'
+		input_file_suffix =   '_atoms_interpolation_scheme_input_file.txt'
+		results_file_suffix = '_atoms_interpolation_scheme_results_file.txt'
 		self.input_information_file    = self.filename_prefix + input_file_suffix
 		self.delta_energy_results_file = self.filename_prefix + results_file_suffix
 
@@ -73,7 +73,7 @@ class Run_Interpolation_Scheme:
 		for size_to_interpolate in self.sizes_to_interpolate:
 			if size_to_interpolate >= self.maximum_size:
 				print('The sizes in sizes_to_interpolate must be less than maximum_size')
-				print('sizes_to_interpolate = ' + str(sizes_to_interpolate))
+				print('sizes_to_interpolate = ' + str(self.sizes_to_interpolate))
 				print('maximum_size = ' + str(self.maximum_size))
 				exit('')
 			if size_to_interpolate <= 0:
@@ -306,27 +306,26 @@ class Run_Interpolation_Scheme:
 					inputting = self.octa_data
 					motif_type = 'Octahedron'
 				else:
-					datum = line.split('\t')
+					datum = line.rstrip().split('\t')
 					noAtoms = int(datum[0])
 					if noAtoms > self.maximum_size:
 						self.maximum_size = noAtoms
 					try:
 						if motif_type == 'Icosahedron':
-							motif_details = [datum[1]]
-							delta_energy  = datum[2]
+							motif_details = [int(datum[1])]
+							delta_energy  =  float(datum[2])
 						elif motif_type == 'Decahedron':
-							motif_details = [datum[1], datum[2], datum[3]]
-							delta_energy  = datum[4]
+							motif_details = [int(datum[1]), int(datum[2]), int(datum[3])]
+							delta_energy  =  float(datum[4])
 						elif motif_type == 'Octahedron':
-							motif_details = [datum[1], datum[2]]
-							delta_energy  = datum[3]
+							motif_details = [int(datum[1]), int(datum[2])]
+							delta_energy  = float(datum[3])
 					except IndexError as exception_message:
 						if manual_mode_file_found:
-							tostring  = 'Error when inputting data from '+str(input_file)+'\n'
-							tostring += 'One of your entries in this file was not filled in completely\n'
-							tostring += 'Check line '+str(line_count)+' of '+str(input_file)+'\n'
-							tostring += 'and see if you have filled this in completely.\n'
-							tostring += exception_message
+							tostring  = 'Error when inputting data from '+str(input_file)+'.\n'
+							tostring += 'One of your entries in this file was not filled in completely.\n'
+							tostring += 'Check line '+str(line_count)+' of '+str(input_file)+' and see if you have filled this in completely.\n'
+							tostring += str(exception_message)
 							raise IndexError(tostring)
 						else:
 							raise IndexError(exception_message)
