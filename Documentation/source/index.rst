@@ -21,7 +21,7 @@ Welcome to the Nanocluster Interpolation Scheme Program (NISP) documentation!
 
 This documentation is designed to guide the user to use the Nanocluster Interpolation Scheme Program (NISP). This algorithm is designed to perform the interpolation scheme described in:
 
-  *A. L. Garden, A. Pedersen, H. Jónsson, “Reassignment of ‘magic numbers’ of decahdral and FCC structural motifs”, Nanoscale, 10, 5124-5132 (2018),* `https://doi.org/10.1039/C7NR09440J <https://doi.org/10.1039/C7NR09440J>`_
+  *A. L. Garden, A. Pedersen, H. Jónsson, “Reassignment of ‘magic numbers’ of decahedral and FCC structural motifs”, Nanoscale, 10, 5124-5132 (2018),* `https://doi.org/10.1039/C7NR09440J <https://doi.org/10.1039/C7NR09440J>`_
 
 This interpolation scheme creates all the perfect, close shell icosahedral, decahedral, and octahedral clusters that can be created between 13 atoms and an upper atom number limit. These clusters are locally optimised before the delta energy is obtained. 
 
