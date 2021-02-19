@@ -10,7 +10,7 @@
 
 The Nanocluster Interpolation Scheme Program (NISP) is designed to perform an interpolation scheme that can give an idea of icosahedral, decahedral, and octahedral clusters that can be formed with a given number of atoms. 
 
-This scheme is based on the work by Garden et al. as described in "Reassignment of ‘magic numbers’ for Au clusters of decahedral and FCC structural motifs", 
+This scheme is based on the work by Garden *et al.* as described in "Reassignment of ‘magic numbers’ for Au clusters of decahedral and FCC structural motifs", 
 
 	*A. L. Garden, A. Pedersen, H. Jónsson, “Reassignment of ‘magic numbers’ of decahdral and FCC structural motifs”, Nanoscale, 10, 5124-5132 (2018).*
 
