@@ -4,7 +4,7 @@
 *Interpolation_Script.py* - How to run NISP
 ###########################################
 
-In this article, we will look at how to run NISP. NISP is run through the ``Interpolation_Script.py`` python script. You can find examples of ``Run.py`` files at `github.com/GardenGroupUO/Organisms <https://github.com/GardenGroupUO/Organisms>`_ under ``Examples``. Also, you can try out this program by running an example script through a Jupyter notebook. See :ref:` Examples of running NISP <Examples_of_Running_NISP>` to get access to examples of running NISP through this Jupyter notebook!
+In this article, we will look at how to run NISP. NISP is run through the ``Interpolation_Script.py`` python script. You can find examples of ``Run.py`` files at `github.com/GardenGroupUO/NISP <https://github.com/GardenGroupUO/NISP>`_ under ``Examples``. Also, you can try out this program by running an example script through a Jupyter notebook. See :ref:`Examples of running NISP <Examples_of_Running_NISP>` to get access to examples of running NISP through this Jupyter notebook!
 
 Running the ``Interpolation_Script.py`` script
 **********************************************
