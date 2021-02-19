@@ -48,7 +48,7 @@ def write_meta_YAML(version):
     metaYAML.write('about:\n')
     metaYAML.write('  home: https://github.com/GardenGroupUO/NIS\n')
     metaYAML.write('  license: AGPL-3.0\n')
-    metaYAML.write('  summary: "The Nanocluster Interpolation Scheme (NIS) is designed to perform an interpolation scheme that can give an idea of perfect, closed-shell and open-shell clusters that can be formed with a given number of atoms. This scheme is based on the work by Garden et al. as described in "Reassignment of "magic numbers" for Au clusters of decahedral and FCC structural motifs", See https://doi.org/10.1039/C7NR09440J"\n')
+    metaYAML.write('  summary: The Nanocluster Interpolation Scheme (NIS) is designed to perform an interpolation scheme that can give an idea of perfect, closed-shell and open-shell clusters that can be formed with a given number of atoms. This scheme is based on the work by Garden et al. as described in Reassignment of magic numbers for Au clusters of decahedral and FCC structural motifs, See https://doi.org/10.1039/C7NR09440J\n')
     metaYAML.write('\n')
     metaYAML.write('# Build using: conda build .\n')
 
