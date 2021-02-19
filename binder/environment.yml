@@ -1,0 +1,38 @@
+# example from: https://github.com/jupyterlab/jupyterlab-demo
+channels:
+- conda-forge
+dependencies:
+# Jupyter
+- jupyterlab=2
+#- node>=6.11.5
+- nodejs=14
+- nbconvert=5.5
+- widgetsnbextension=3.5
+# Python Kernel
+- ipykernel=5.1
+- ipywidgets=7.5
+#- ipyleaflet=0.12
+#- altair=3.1
+#- bqplot=0.12
+#- dask=2.1
+#- pandas=0.24
+- python=3.7
+#- scikit-image=0.15
+#- scikit-learn=0.21
+#- seaborn=0.9
+#- tensorflow=1.13
+#- sympy=1.4
+#- pyyaml
+#- traittypes==0.2.1
+#- invoke=1.2
+
+# Python Kernel for Organisms
+- pip
+# for js_mol
+#- pip:
+#  # works for regular pip packages
+#  - jupyter_jsmol
+- numpy
+- scipy
+- matplotlib
+- ase=3.21.1

@@ -1,0 +1,32 @@
+{% set version = "1.1.0" %}
+
+package:
+  name: nis
+  version: {{ version }}
+
+source:
+  git_rev: {{ version }}
+  git_url: https://github.com/GardenGroupUO/NIS.git
+
+build:
+  number: 1
+  skip: true  # [win and py27 or win32]
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - pip
+  run:
+    - python
+    - numpy
+    - scipy
+    - ase
+
+about:
+  home: https://github.com/GardenGroupUO/NIS
+  license: AGPL-3.0
+  summary: "The Nanocluster Interpolation Scheme (NIS) is designed to perform an interpolation scheme that can give an idea of perfect, closed-shell and open-shell clusters that can be formed with a given number of atoms. This scheme is based on the work by Garden et al. as described in "Reassignment of "magic numbers" for Au clusters of decahedral and FCC structural motifs", See https://doi.org/10.1039/C7NR09440J"
+
+# Build using: conda build .
