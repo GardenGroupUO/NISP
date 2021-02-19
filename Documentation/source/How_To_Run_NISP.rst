@@ -31,7 +31,16 @@ The pieces of information required in ``input_information`` are:
 * **Cohesive Energy** (*float*): This is the cohesive energy of the element you are using. See :ref:`How_to_obtain_cohesive_energies` to find about about how to obtain cohesive energies. 
 * **Maximum No. of Atoms** (*int*): The number of offspring generated per generation. 
 * **Local Optimiser** (*def*): This is a local optimisation method that you will locally optimise clusters with as well as their delta energies. See :ref:`Local_Minimisation_Function` for information about the local optimiser. If you do not want to give a local optimiser, either set ``input_information['Local Optimiser'] = None``, or do not enter an entry for ``input_information['Local Optimiser']`` into your ``Interpolation_Script.py`` script. Do this if you want to input your data into NISP manually. 
-* **Manual Mode** (*bool*): This indicates that you do not not want NISP to automatically locally optimise the clusters that are made and get their energies. if ``Manual Mode`` is set to ``True``, the program will make all the clusters that you would like to manually locally optimise and get the energies of, as well as an input file for you to input those energies into. If you have already run this program once and got the input file, this tag will tell NISP to look through the input file and get all the data from it to make the interpolation scheme plots and results files. 
+* **Manual Mode** (*bool* or *str.*): This indicates that you do not not want NISP to automatically locally optimise the clusters that are made and get their energies. If ``Manual Mode`` is set to ``False``, NISP will perform all the calculation needed, you just need to provide a local optimiser definition. The other options that you can set ``Manual Mode`` to are:
+	* ``'VASP'``: This will format the cluster file as POSCARs and will place those POSCARs into organised folders.
+	* ``'xyz'``:  This will format all the clusters as xyz files.
+	All these files and subdirectories will be placed into a folder called ``clusters``. 
+
+
+
+
+
+the program will make all the clusters that you would like to manually locally optimise and get the energies of, as well as an input file for you to input those energies into. If you have already run this program once and got the input file, this tag will tell NISP to look through the input file and get all the data from it to make the interpolation scheme plots and results files. 
 
 An example of these parameters in ``Interpolation_Script.py`` is given below:
 
