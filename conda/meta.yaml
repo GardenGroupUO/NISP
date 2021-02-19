@@ -1,12 +1,12 @@
 {% set version = "1.2.0" %}
 
 package:
-  name: nis
+  name: nisp
   version: {{ version }}
 
 source:
   git_rev: {{ version }}
-  git_url: https://github.com/GardenGroupUO/NIS.git
+  git_url: https://github.com/GardenGroupUO/NISP.git
 
 build:
   number: 1
@@ -25,8 +25,8 @@ requirements:
     - ase
 
 about:
-  home: https://github.com/GardenGroupUO/NIS
+  home: https://github.com/GardenGroupUO/NISP
   license: AGPL-3.0
-  summary: The Nanocluster Interpolation Scheme (NIS) is designed to perform an interpolation scheme that can give an idea of perfect, closed-shell and open-shell clusters that can be formed with a given number of atoms. This scheme is based on the work by Garden et al. as described in Reassignment of magic numbers for Au clusters of decahedral and FCC structural motifs, See https://doi.org/10.1039/C7NR09440J
+  summary: The Nanocluster Interpolation Scheme Program (NISP) is designed to perform an interpolation scheme that can give an idea of the types of icosahedral, decahedral, and octahedral clusters that can be formed with a given number of atoms. This scheme is based on the work by Garden et al. as described in Reassignment of magic numbers for Au clusters of decahedral and FCC structural motifs, See https://doi.org/10.1039/C7NR09440J
 
 # Build using: conda build .
