@@ -1,4 +1,4 @@
-from NanoIS import Run_Interpolation_Scheme 
+from NISP import Run_Interpolation_Scheme 
 from RunMinimisation_Cu import Minimisation_Function
 
 input_information = {}
@@ -13,8 +13,8 @@ output_information['Lower No of Atom Range']   = 500
 output_information['Upper Delta Energy Range'] = 2.8
 output_information['Lower Delta Energy Range'] = 2.2
 output_information['Size to Interpolate Over'] = [37,78]
-output_information['Filename Prefix'] = ''
 
 no_of_cpus = 1
+filename_prefix = ''
 
-Run_Interpolation_Scheme(input_information=input_information,output_information=output_information,no_of_cpus=no_of_cpus)
+Run_Interpolation_Scheme(input_information=input_information,output_information=output_information,no_of_cpus=no_of_cpus,filename_prefix=filename_prefix)

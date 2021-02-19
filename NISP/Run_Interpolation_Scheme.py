@@ -40,31 +40,32 @@ class Run_Interpolation_Scheme:
 	'''
 	This program is designed to run and give the results of the interpolation scheme as described in A. L. Garden, A. Pedersen, H. Jónsson, “Reassignment of ‘magic numbers’ of decahdral and FCC structural motifs”, Nanoscale, 10, 5124-5132 (2018).
 	'''
-	def __init__(self,input_information,sizes_to_interpolate,plot_information={},no_of_cpus=1,filename=''):
-		self.setup_for_input_data(input_information,sizes_to_interpolate,plot_information,no_of_cpus,filename)
+	def __init__(self,input_information,output_information={},no_of_cpus=1,filename_prefix=''):
+		self.setup_for_input_data(input_information,no_of_cpus,filename_prefix)
 		self.get_input_data()
-		self.setup_for_running_interpolation(input_information,sizes_to_interpolate,plot_information,no_of_cpus)
+		self.setup_for_running_interpolation(output_information,filename_prefix)
 		self.run_interpolation()
 
 	# ------------------------------------------------------------------------------------------------------------------
 	# The following definitions are those for setting up the program
 
-	def setup_for_input_data(self,input_information,sizes_to_interpolate,plot_information,no_of_cpus,filename):
+	def setup_for_input_data(self,input_information,no_of_cpus,filename_prefix):
 		self.input_information = input_information
 		self.element = self.input_information['Element Type']
 		self.e_coh = self.input_information['Cohesive Energy']
 		self.maximum_size = self.input_information['Maximum No. of Atoms']
 		self.local_optimiser = self.input_information['Local Optimiser']
 		self.no_of_cpus = no_of_cpus
-		self.filename = filename
-		if self.filename == '':
-			self.filename = str(self.element) + '_Max_Size_' + str(self.maximum_size)
+		self.filename_prefix = filename_prefix
+		if self.filename_prefix == '':
+			self.filename_prefix = str(self.element) + '_Max_Size_' + str(self.maximum_size)
 		results_file_suffix = '_atoms_interpolation_scheme_results_file.txt'
-		self.input_information_file = self.filename + results_file_suffix
+		self.input_information_file = self.filename_prefix + results_file_suffix
 
-	def setup_for_running_interpolation(self,input_information,sizes_to_interpolate,plot_information,no_of_cpus):
-		self.sizes_to_interpolate = sizes_to_interpolate
-		for size_to_interpolate in sizes_to_interpolate:
+	def setup_for_running_interpolation(self,output_information,filename_prefix):
+		self.output_information = output_information
+		self.sizes_to_interpolate = check_value('Size to Interpolate Over',self.output_information,[])
+		for size_to_interpolate in self.sizes_to_interpolate:
 			if size_to_interpolate >= self.maximum_size:
 				print('The sizes in sizes_to_interpolate must be less than maximum_size')
 				print('sizes_to_interpolate = ' + str(sizes_to_interpolate))
@@ -75,12 +76,12 @@ class Run_Interpolation_Scheme:
 				print('sizes_to_interpolate = ' + str(sizes_to_interpolate))
 				exit('')
 		# -----------------------------------------------------------------
-		self.higherNoAtomRange = check_value('Upper No of Atom Range',  plot_information,None) 
-		self.lowerNoAtomRange  = check_value('Lower No of Atom Range',  plot_information,None) 
+		self.higherNoAtomRange = check_value('Upper No of Atom Range',  self.output_information,None) 
+		self.lowerNoAtomRange  = check_value('Lower No of Atom Range',  self.output_information,None) 
 		if self.lowerNoAtomRange == None:
 			self.lowerNoAtomRange = 0
-		self.higherDERange     = check_value('Upper Delta Energy Range',plot_information,None) 
-		self.lowerDERange      = check_value('Lower Delta Energy Range',plot_information,None) 
+		self.higherDERange     = check_value('Upper Delta Energy Range',self.output_information,None) 
+		self.lowerDERange      = check_value('Lower Delta Energy Range',self.output_information,None) 
 		# -----------------------------------------------------------------
 
 	# ------------------------------------------------------------------------------------------------------------------------------
@@ -412,16 +413,16 @@ class Run_Interpolation_Scheme:
 		ax1.set_xlim(left=self.lowerNoAtomRange,right=self.higherNoAtomRange)
 		ax1.set_ylim(bottom=self.lowerDERange,top=self.higherDERange)
 		plt.legend(custom_lines,custom_names,loc='best',fancybox=True,framealpha=1, shadow=True, borderpad=1)
-		plt.savefig(self.filename + '_Interpolation_Scheme.png')
-		plt.savefig(self.filename + '_Interpolation_Scheme.svg')
+		plt.savefig(self.filename_prefix + '_Interpolation_Scheme.png')
+		plt.savefig(self.filename_prefix + '_Interpolation_Scheme.svg')
 
 		for size_to_interpolate in self.sizes_to_interpolate:
 			ax1.axvline(x=size_to_interpolate,ymin=0,ymax=1, color='green', lw=1, linestyle='-')
 		if len(self.sizes_to_interpolate) > 0:
 			custom_lines.append(Line2D([0], [0], color='green', lw=1, linestyle='-'))
 			custom_names.append('Interpolation Line')
-		plt.savefig(self.filename + '_Interpolation_Scheme_with_lines.png')
-		plt.savefig(self.filename + '_Interpolation_Scheme_with_lines.svg')
+		plt.savefig(self.filename_prefix + '_Interpolation_Scheme_with_lines.png')
+		plt.savefig(self.filename_prefix + '_Interpolation_Scheme_with_lines.svg')
 		#plt.show()
 
 	def get_intersections(self):
@@ -458,7 +459,7 @@ class Run_Interpolation_Scheme:
 					string_to_return += 'Number of atoms to remove from ' + motif + ' ' + str(start_details) + ': ' + str(atom_diff) + '\n'
 				return string_to_return
 
-			self.Interpolation_details = open(self.filename+'_Clusters_interpolated_at_size_'+str(size_to_interpolate)+'.txt','w')
+			self.Interpolation_details = open(self.filename_prefix+'_Clusters_interpolated_at_size_'+str(size_to_interpolate)+'.txt','w')
 			self.Interpolation_details.write('------------------------------------\n')
 			self.Interpolation_details.write('------------------------------------\n')
 			self.Interpolation_details.write('Icosahedral Interpolation\n')
