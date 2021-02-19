@@ -35,11 +35,6 @@ The pieces of information required in ``input_information`` are:
 	* ``'VASP'``: This will format the cluster file as POSCARs and will place those POSCARs into organised folders.
 	* ``'xyz'``:  This will format all the clusters as xyz files.
 	All these files and subdirectories will be placed into a folder called ``clusters``. 
-
-
-
-
-
 the program will make all the clusters that you would like to manually locally optimise and get the energies of, as well as an input file for you to input those energies into. If you have already run this program once and got the input file, this tag will tell NISP to look through the input file and get all the data from it to make the interpolation scheme plots and results files. 
 
 An example of these parameters in ``Interpolation_Script.py`` is given below:
@@ -51,8 +46,8 @@ An example of these parameters in ``Interpolation_Script.py`` is given below:
 	:lineno-start: 4
 	:lines: 4-9
 
-2) Plotting information for the interpolation scheme
-====================================================
+2) Output information for the interpolation scheme
+==================================================
 
 We then load the information required by the interpolation scheme to plot the results from the interpolation scheme. The sizes of all the clusters that you would like to obtain possible clusters for are also inputted here and given as txt files. 
 
@@ -74,12 +69,14 @@ An example of these parameters in ``Interpolation_Script.py`` is given below:
 	:tab-width: 4
 	:linenos:
 	:lineno-start: 11
-	:lines: 11-17
+	:lines: 11-16
 
-3) The number of CPUs used by the program
-=========================================
+3) The number of CPUs used by the program and the filename prefix of input and output files
+===========================================================================================
 
 NISP can run for a long time, especially if you have set **Maximum No. of Atoms** to over 1000 atoms. Therefore, it is possible to run this program for a while. Therefore, it is possible to parallelise this program so that it run a bit faster. This can be set by setting the ``no_of_cpus`` variable. ``no_of_cpus`` must be set to an int. The default value for the ``no_of_cpus`` variable is ``1``. 
+
+Furthermore, you can also give a custom name to the input and output files that you make/are made. This is given in ``filename_prefix``. However, you do not need to do this. If you dont want to have a custom filename, do not include ``filename_prefix`` in your script or set ``filename_prefix = ''``. 
 
 An example of ``no_of_cpus`` in ``Interpolation_Script.py`` is given below:
 
@@ -87,8 +84,8 @@ An example of ``no_of_cpus`` in ``Interpolation_Script.py`` is given below:
 	:language: python
 	:tab-width: 4
 	:linenos:
-	:lineno-start: 19
-	:lines: 19
+	:lineno-start: 18
+	:lines: 18-19
 
 Run NISP!
 =========

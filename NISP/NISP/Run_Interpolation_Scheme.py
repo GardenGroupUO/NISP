@@ -245,7 +245,7 @@ class Run_Interpolation_Scheme:
 			pool.join()
 			data = results.get()
 		else:
-			from NISP.Counter import Counter
+			from NISP.NISP.Counter import Counter
 			counter = Counter()
 			data = [get_cluster(task+(counter,)) for task in tasks]
 		return data
