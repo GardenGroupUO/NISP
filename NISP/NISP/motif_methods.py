@@ -1,4 +1,4 @@
-
+from sys import exit
 
 def no_of_atoms_to_make_ico(noshells):
 	if noshells < 1:

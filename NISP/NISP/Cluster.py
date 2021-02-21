@@ -1,4 +1,4 @@
-
+from sys import exit
 
 def get_cluster(task):
 	motif, motif_details, element, local_optimiser, e_coh, no_atoms, no_of_tasks, counter = task

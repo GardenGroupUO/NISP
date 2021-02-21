@@ -1,5 +1,6 @@
 import os
 from shutil import rmtree
+from sys import exit
 
 from ase.io import write
 from ase.cluster.icosahedron import Icosahedron

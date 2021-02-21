@@ -29,6 +29,7 @@ from NISP.NISP.Manual_Mode import write_files_for_manual_mode
 print('Loading os, timing, and multiprocessing modules')
 import os, time
 import multiprocessing as mp
+from sys import exit
 print('Beginning Interpolation Program')
 
 def check_value(value,plot_information,default):
