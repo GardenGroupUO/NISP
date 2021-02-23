@@ -5,7 +5,7 @@
 [![PyPI](https://img.shields.io/pypi/v/NISP)](https://pypi.org/project/NISP/)
 [![Conda](https://img.shields.io/conda/v/gardengroupuo/nisp)](https://anaconda.org/GardenGroupUO/nisp)
 [![Documentation](https://img.shields.io/badge/Docs-click%20here-brightgreen)](https://nisp.readthedocs.io/en/latest/)
-[![LGTM Grade](https://img.shields.io/lgtm/grade/python/github/GardenGroupUO/NISP)](https://lgtm.com/projects/g/GardenGroupUO/NISP/context:python)
+<!-- [![LGTM Grade](https://img.shields.io/lgtm/grade/python/github/GardenGroupUO/NISP)](https://lgtm.com/projects/g/GardenGroupUO/NISP/context:python) -->
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/GardenGroupUO/NISP/main?urlpath=lab)
 [![GitHub](https://img.shields.io/github/license/GardenGroupUO/NISP)](https://www.gnu.org/licenses/agpl-3.0.en.html)
 
