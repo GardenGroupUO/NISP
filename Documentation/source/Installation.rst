@@ -154,15 +154,6 @@ This is the location of these useful ASE tools. You want to put this as a path i
 	export PATH=/Users/geoffreyweal/Library/Python/3.6/bin:$PATH
 	############################################################
 
-As Soon As Possible (ASAP)
---------------------------
-
-As Soon As Possible (ASAP) is not a pre-requisite of this program, however it is a great source of empirical potentials that can be used to calculate the energies of clustersand chemical systems with ASE and with this program. You can read more about it at `ASAP <https://wiki.fysik.dtu.dk/asap/>`_. You can find out how to install it at `ASAP Installation <https://wiki.fysik.dtu.dk/asap/Installation>`_, however I have found the best way to use it simply is using pip. To install using pip, perform the following in the terminal. Generally, this program takes a bit of time to install. There is no requirement for what version of ASAP you use. We have been using version ``asap3==3.11.10``. 
-
-.. code-block:: bash
-
-	pip3 install --upgrade --user asap3
-
 .. _Installation_of_the_Genetic_Algorithm:
 
 Setting up NISP
