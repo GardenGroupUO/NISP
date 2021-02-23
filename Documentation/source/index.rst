@@ -19,6 +19,41 @@ Welcome to the Nanocluster Interpolation Scheme Program (NISP) documentation!
 .. raw:: html
     :file: Images/github_licence.svg
 
+
+.. image:: https://img.shields.io/pypi/pyversions/NISP
+   :target: https://docs.python.org/3/
+   :alt: Python Version
+
+
+.. image:: https://img.shields.io/github/v/release/GardenGroupUO/NISP
+   :target: https://github.com/GardenGroupUO/NISP
+   :alt: GitHub release (latest by date)
+
+
+.. image:: https://img.shields.io/pypi/v/NISP
+   :target: https://pypi.org/project/NISP/
+   :alt: PyPI
+
+
+.. image:: https://img.shields.io/conda/v/gardengroupuo/nisp
+   :target: https://anaconda.org/GardenGroupUO/nisp
+   :alt: Conda
+
+
+.. image:: https://img.shields.io/lgtm/grade/python/github/GardenGroupUO/NISP
+    :target: https://lgtm.com/projects/g/GardenGroupUO/NISP/context:python
+    :alt: LGTM Grade
+
+.. image:: https://mybinder.org/badge_logo.svg
+   :target: https://mybinder.org/v2/gh/GardenGroupUO/Organisms_Jupyter_Examples/main?urlpath=lab
+   :alt: Binder
+
+
+.. image:: https://img.shields.io/github/license/GardenGroupUO/NISP
+   :target: https://www.gnu.org/licenses/agpl-3.0.en.html
+   :alt: Licence
+
+
 This documentation is designed to guide the user to use the Nanocluster Interpolation Scheme Program (NISP). This algorithm is designed to perform the interpolation scheme described in:
 
   *A. L. Garden, A. Pedersen, H. Jónsson, “Reassignment of ‘magic numbers’ of decahedral and FCC structural motifs”, Nanoscale, 10, 5124-5132 (2018),* `https://doi.org/10.1039/C7NR09440J <https://doi.org/10.1039/C7NR09440J>`_
@@ -35,7 +70,11 @@ Prof Hannes Jónsson: `english.hi.is/staff/hj <https://english.hi.is/staff/hj>`_
 
 **Click the Binder link below to try NISP out on the web! (The Binder page may load quickly or may take 1 or 2 minutes to load)**
 
-https://mybinder.org/v2/gh/GardenGroupUO/NISP/main?urlpath=lab
+
+.. image:: https://mybinder.org/badge_logo.svg
+   :target: https://mybinder.org/v2/gh/GardenGroupUO/NISP/main?urlpath=lab
+   :alt: Binder
+
 
 Table of Contents
 =================
