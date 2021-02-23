@@ -40,11 +40,6 @@ Welcome to the Nanocluster Interpolation Scheme Program (NISP) documentation!
    :alt: Conda
 
 
-.. .. image:: https://img.shields.io/lgtm/grade/python/github/GardenGroupUO/NISP
-..     :target: https://lgtm.com/projects/g/GardenGroupUO/NISP/context:python
-..     :alt: LGTM Grade
-    
-
 .. image:: https://mybinder.org/badge_logo.svg
    :target: https://mybinder.org/v2/gh/GardenGroupUO/Organisms_Jupyter_Examples/main?urlpath=lab
    :alt: Binder
@@ -53,6 +48,12 @@ Welcome to the Nanocluster Interpolation Scheme Program (NISP) documentation!
 .. image:: https://img.shields.io/github/license/GardenGroupUO/NISP
    :target: https://www.gnu.org/licenses/agpl-3.0.en.html
    :alt: Licence
+
+
+.. .. image:: https://img.shields.io/lgtm/grade/python/github/GardenGroupUO/NISP
+..     :target: https://lgtm.com/projects/g/GardenGroupUO/NISP/context:python
+..     :alt: LGTM Grade
+
 
 
 This documentation is designed to guide the user to use the Nanocluster Interpolation Scheme Program (NISP). This algorithm is designed to perform the interpolation scheme described in:
