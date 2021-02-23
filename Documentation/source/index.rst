@@ -6,19 +6,6 @@
 Welcome to the Nanocluster Interpolation Scheme Program (NISP) documentation!
 #############################################################################
 
-.. raw:: html
-    :file: Images/pypi_python_version.svg
-.. raw:: html
-    :file: Images/github_release.svg
-.. raw:: html
-    :file: Images/pypi_version.svg
-.. raw:: html
-    :file: Images/conda_version.svg
-.. raw:: html
-    :file: Images/binder_badge.svg
-.. raw:: html
-    :file: Images/github_licence.svg
-
 
 .. image:: https://img.shields.io/pypi/pyversions/NISP
    :target: https://docs.python.org/3/
@@ -70,7 +57,7 @@ Prof Hannes Jónsson: `english.hi.is/staff/hj <https://english.hi.is/staff/hj>`_
 
 **If you are new to the NISP program, it is recommended try it out by running NISP live on our interactive Jupyter+Binder page before you download it. On Jupyter+Binder, you can play around with the NISP program on the web. You do not need to install anything to try NISP out on Jupyter+Binder.** 
 
-**Click the Binder link below to try NISP out on the web! (The Binder page may load quickly or may take 1 or 2 minutes to load)**
+**Click the Binder button below to try NISP out on the web! (The Binder page may load quickly or may take 1 or 2 minutes to load)**
 
 
 .. image:: https://mybinder.org/badge_logo.svg
