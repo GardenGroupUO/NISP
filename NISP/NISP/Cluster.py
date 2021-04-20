@@ -52,7 +52,7 @@ class Cluster:
 		self.motif_details = motif_details
 		self.get_energy = get_energy
 		# Calculate the delta energy of the clusters
-		if not (element == None and local_optimiser == None and e_coh == None) and (no_atoms == None and delta_energy == None):
+		if not (element is None and local_optimiser is None and e_coh is None) and (no_atoms is None and delta_energy is None):
 			if motif == 'Icosahedron':
 				if isinstance(motif_details,list):
 					noshells = motif_details[0]
@@ -85,7 +85,7 @@ class Cluster:
 			if self.get_energy:
 				energy = cluster.get_potential_energy()
 				self.delta_energy = get_Delta_Energy(energy,cluster,e_coh)
-		elif (element == None and local_optimiser == None and e_coh == None) and not (no_atoms == None and delta_energy == None):
+		elif (element is None and local_optimiser is None and e_coh is None) and not (no_atoms is None and delta_energy is None):
 			self.no_atoms = no_atoms
 			self.delta_energy = delta_energy
 		else:

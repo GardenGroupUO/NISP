@@ -89,7 +89,7 @@ def write_decahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_suf
 	p = P_START # p is the atom length along the 100_face_normal_to_5_fold_axis
 	q = Q_ORIGINAL # q is the atom length along the 100_face_parallel_to_5_fold_axis
 	r = R_ORIGINAL # r is the marks_reenterance_depth
-	previous_value_of_r = -1
+	#previous_value_of_r = -1
 
 	all_deca_details = []
 	while True:

@@ -37,10 +37,10 @@ class Interpolation_Connection:
 
 	def __str__(self):
 		if self.type_of_connection in ['reent', 'plane']:
-			line_type = 'Solid'
+			#line_type = 'Solid'
 			removal_method = '100 Facet or from Corners'
 		elif self.type_of_connection in ['deca_111','octa_111']:
-			line_type = 'Dashed'
+			#line_type = 'Dashed'
 			removal_method = '111 Facet'
 		elif self.type_of_connection in ['octa_fcc']:
 			removal_method = '100 Facet'

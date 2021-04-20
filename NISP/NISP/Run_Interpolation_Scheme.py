@@ -84,7 +84,7 @@ class Run_Interpolation_Scheme:
 		# -----------------------------------------------------------------
 		self.higherNoAtomRange = check_value('Upper No of Atom Range',  self.output_information,None) 
 		self.lowerNoAtomRange  = check_value('Lower No of Atom Range',  self.output_information,None) 
-		if self.lowerNoAtomRange == None:
+		if self.lowerNoAtomRange is None:
 			self.lowerNoAtomRange = 0
 		self.higherDERange     = check_value('Upper Delta Energy Range',self.output_information,None) 
 		self.lowerDERange      = check_value('Lower Delta Energy Range',self.output_information,None) 
@@ -132,7 +132,7 @@ class Run_Interpolation_Scheme:
 			magic_numbers.append(no_atoms)
 			noshells += 1
 		for index in range(len(tasks)):
-			task = tasks[index]
+			#task = tasks[index]
 			tasks[index] = tuple(tasks[index] + [len(tasks)])
 		print('============================================================')
 		print('Performing Tasks')
@@ -155,7 +155,7 @@ class Run_Interpolation_Scheme:
 		p = P_START # p is the atom length along the 100_face_normal_to_5_fold_axis
 		q = Q_ORIGINAL # q is the atom length along the 100_face_parallel_to_5_fold_axis
 		r = R_ORIGINAL # r is the marks_reenterance_depth
-		previous_value_of_r = -1
+		#previous_value_of_r = -1
 		#deca_data = []; 
 		deca_magic = []
 		tasks = []
@@ -177,7 +177,7 @@ class Run_Interpolation_Scheme:
 			if (q > p + 3) or (previous_value_of_r == 0 and r == 0):
 				q = 1; p += 1 # p and q are changed to reflect the next cluster
 		for index in range(len(tasks)):
-			task = tasks[index]
+			#task = tasks[index]
 			tasks[index] = tuple(tasks[index] + [len(tasks)])
 		print('============================================================')
 		print('Performing Tasks')
@@ -221,7 +221,7 @@ class Run_Interpolation_Scheme:
 				cutoff = get_max_cutoff_value(length)
 				cutoff_max = cutoff
 		for index in range(len(tasks)):
-			task = tasks[index]
+			#task = tasks[index]
 			tasks[index] = tuple(tasks[index] + [len(tasks)])
 		print('============================================================')
 		print('Performing Tasks')

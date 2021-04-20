@@ -4,7 +4,7 @@ Geoffrey Weal, make_finish_files.py, 10/02/2021
 
 This program will put all the input files you need for VASP into all the cluster folders.
 '''
-import os, sys
+
 from os import copyfile
 
 VASP_Input_Files = 'VASP_Input_Files'
