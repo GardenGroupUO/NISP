@@ -30,12 +30,7 @@ The pieces of information required in ``input_information`` are:
 * **Element Type** (*str.*): This is the type of element that the cluster is made up of.
 * **Cohesive Energy** (*float*): This is the cohesive energy of the element you are using. See :ref:`How_to_obtain_cohesive_energies` to find about about how to obtain cohesive energies. 
 * **Maximum No. of Atoms** (*int*): The number of offspring generated per generation. 
-* **Local Optimiser** (*def*): This is a local optimisation method that you will locally optimise clusters with as well as their delta energies. See :ref:`Local_Minimisation_Function` for information about the local optimiser. If you do not want to give a local optimiser, either set ``input_information['Local Optimiser'] = None``, or do not enter an entry for ``input_information['Local Optimiser']`` into your ``Interpolation_Script.py`` script. Do this if you want to input your data into NISP manually. 
-* **Manual Mode** (*bool* or *str.*): This indicates that you do not not want NISP to automatically locally optimise the clusters that are made and get their energies. If ``Manual Mode`` is set to ``False``, NISP will perform all the calculation needed, you just need to provide a local optimiser definition. The other options that you can set ``Manual Mode`` to are:
-	* ``'VASP'``: This will format the cluster file as POSCARs and will place those POSCARs into organised folders.
-	* ``'xyz'``:  This will format all the clusters as xyz files.
-	All these files and subdirectories will be placed into a folder called ``clusters``. 
-the program will make all the clusters that you would like to manually locally optimise and get the energies of, as well as an input file for you to input those energies into. If you have already run this program once and got the input file, this tag will tell NISP to look through the input file and get all the data from it to make the interpolation scheme plots and results files. 
+* **Local Optimiser** (*def/str.*): This is a local optimisation method that you will locally optimise clusters with as well as their delta energies. See :ref:`Local_Minimisation_Function` for information about the local optimiser works and is written. You can also use VASP to perform DFT local optimisations on your clusters. Do this by setting the ``'Local Optimiser'`` in ``input_information`` as ``input_information['Local Optimiser'] = 'VASP'``. See XXX to learn more about how to perform VASP calculations on clusters created using NISP. You can also elect to manually enter in the energies of the clusters. To do this, enter in  ``input_information['Local Optimiser'] = 'Manual Mode'``. See XXX for more information about how to manually enter in energies for clusters into NISP. 
 
 An example of these parameters in ``Interpolation_Script.py`` is given below:
 
@@ -44,7 +39,7 @@ An example of these parameters in ``Interpolation_Script.py`` is given below:
 	:tab-width: 4
 	:linenos:
 	:lineno-start: 4
-	:lines: 4-9
+	:lines: 4-8
 
 2) Output information for the interpolation scheme
 ==================================================
@@ -68,8 +63,8 @@ An example of these parameters in ``Interpolation_Script.py`` is given below:
 	:language: python
 	:tab-width: 4
 	:linenos:
-	:lineno-start: 11
-	:lines: 11-16
+	:lineno-start: 10
+	:lines: 10-15
 
 3) The number of CPUs used by the program and the filename prefix of input and output files
 ===========================================================================================
@@ -84,8 +79,8 @@ An example of ``no_of_cpus`` in ``Interpolation_Script.py`` is given below:
 	:language: python
 	:tab-width: 4
 	:linenos:
-	:lineno-start: 18
-	:lines: 18-19
+	:lineno-start: 17
+	:lines: 17-18
 
 Run NISP!
 =========
@@ -96,5 +91,5 @@ You have got to the end of all the parameter setting stuff. Now on to running NI
 	:language: python
 	:tab-width: 4
 	:linenos:
-	:lineno-start: 21
-	:lines: 21
+	:lineno-start: 20
+	:lines: 20
