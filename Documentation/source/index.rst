@@ -100,8 +100,8 @@ Table of Contents
    How_NISP_Works
    Installation
    How_To_Run_NISP
-   Local_Minimisation_Function
    How_to_obtain_cohesive_energies
+   Local_Minimisation_Function
    How_To_VASP_In_NISP
    How_To_Manually_Enter_Energy_Results_Into_NISP
    Examples_of_Running_NISP

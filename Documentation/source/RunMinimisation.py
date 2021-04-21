@@ -3,7 +3,6 @@ RunMinimisation.py, GRW, 8/6/17
  
 This script is designed to locally optimise clusters.
 '''
-import sys, time
 from asap3.Internal.BuiltinPotentials import Gupta
 from ase.optimize import FIRE
 from ase.io import write
@@ -21,7 +20,7 @@ def Minimisation_Function(cluster):
 	cluster.set_calculator(calculator)
 	original_cluster = cluster.copy()
 	dyn = FIRE(cluster,logfile=None)
-	startTime = time.time(); converged = False
+	converged = False
 	try:
 		dyn.run(fmax=0.01,steps=5000)
 		converged = dyn.converged()
@@ -38,5 +37,4 @@ def Minimisation_Function(cluster):
 		errorMessage += exception_message
 		write(cluster_name,original_cluster)
 		raise Exception(errorMessage)
-	endTime = time.time()
 	return cluster

@@ -15,7 +15,7 @@ The implementation of the local minimisation process into NISP has been designed
 
 Because of this flexibility, it is possible to use any type of calculator from ASE, ASAP, GWAP, LAMMPS, etc. It is even possible for the user to design this to use with non-python user-interface based local optimisers. See :ref:`How to write the Minimisation_Function for non-ASE Implemented Calculator <non_ASE_Implemented_Calculator>` for information on how to write a ``Minimisation_Function`` def to do this. 
 
-While it is possible to implement DFT based programs into NISP, such as VASP or Quantum Espresso, it is recommended that you obtain the clusters with those programs individually and enter the energy that you obtained from the programs into NISP manually. See :ref:`How to manually enter energy results into NISP <How_To_Manually_Enter_Energy_Results_Into_NISP>` to obtain more information about how to manually enter energy results into NISP. 
+If you want to use VASP to perform local optimisation calculations, see :ref:`How to perform NISP with VASP calculations <How_To_VASP_In_NISP>`. If you want to use another long running programming like Quantum Espresso, you will need to enter in cluster energies from the program you use into NISP manually. See :ref:`How to manually enter energy results into NISP <How_To_Manually_Enter_Energy_Results_Into_NISP>` for more information. 
 
 In the following documentation we will describe how the ``Minimisation_Function`` method is designed in a **RunMinimisation.py** file, and how you can make your own. Examples of **RunMinimisation.py** files can be found in `github.com/GardenGroupUO/NISP <https://github.com/GardenGroupUO/NISP>`_ in the directory path ``Examples`` (this should be found in `github.com/GardenGroupUO/NISP/tree/main/Examples <https://github.com/GardenGroupUO/Organisms/tree/main/Examples>`_). 
 
@@ -26,7 +26,7 @@ The ``Minimisation_Function`` can be written into the Run.py file. However, as a
 
 Furthermore, the def ``Minimisation_Function`` does not even need to be called ``Minimisation_Function``. It could be called ``TheGuptaFunction``, ``the_local_minimisation_function``, or ``The_Electric_Eel_Function``. Again, I have just always called it ``Minimisation_Function`` for simplicity and for ease when using different ``Interpolation_Script.py`` files with different ``Minimisation_Function`` codes. 
 
-However, it is important that this code is referenced somehow in the ``Interpolation_Script.py`` script. The algorithm is imported into ``Interpolation_Script.py`` as follows (You can also see this in :ref:`Interpolation_Script.py - How to run NISP <How_To_Run_NISP>`):
+However, it is important that this code is referenced somehow in your ``Interpolation_Script.py`` script if you want to locally optimise clusters during the NISP program. The algorithm is imported into ``Interpolation_Script.py`` as follows (You can also see this in :ref:`Interpolation_Script.py - How to run NISP <How_To_Run_NISP>`):
 
 .. code-block:: python
 
@@ -72,7 +72,7 @@ To begin, you will need to import all the external files that you will need so t
 	:tab-width: 4
 	:linenos: 
 	:lineno-start: 6
-	:lines: 6-9
+	:lines: 6-8
 
 Preparing the cluster 
 ---------------------
@@ -83,8 +83,8 @@ First, it is usually a good idea to tell ase if you want the calculator to calcu
 	:language: python
 	:tab-width: 4
 	:linenos:
-	:lineno-start: 12
-	:lines: 12
+	:lineno-start: 11
+	:lines: 11
 	:dedent: 4
 
 Preparing the Potential, and setting up the local optimiser.
@@ -100,8 +100,8 @@ See below for a example:
 	:language: python
 	:tab-width: 4
 	:linenos:
-	:lineno-start: 13
-	:lines: 13-23
+	:lineno-start: 12
+	:lines: 12-22
 	:dedent: 4
 
 Executing the local optimiser
@@ -117,8 +117,8 @@ However I have found that if something breaks for some reason during the optimis
 	:language: python
 	:tab-width: 4
 	:linenos:
-	:lineno-start: 24
-	:lines: 24-41
+	:lineno-start: 23
+	:lines: 23-39
 	:dedent: 4
 
 You can also see that I have placed an if statement to determine if the local optimsation actually converged. I have found that it is useful to include a way of noting if the optimisation was able to converge or not. See more about `How to perform a local optimisation in ASE here <https://wiki.fysik.dtu.dk/ase/ase/optimize.html>`_, or refer to the manual of the local optimiser you are using for more information on how to do this.
@@ -132,8 +132,8 @@ Remember to return the ``cluster`` to the genetic algorithm so that it can use t
 	:language: python
 	:tab-width: 4
 	:linenos:
-	:lineno-start: 42
-	:lines: 42
+	:lineno-start: 40
+	:lines: 40
 	:dedent: 4
 
 
