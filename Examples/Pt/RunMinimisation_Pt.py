@@ -37,5 +37,5 @@ def Minimisation_Function(cluster):
 		errorMessage += exception_message
 		write(cluster_name,original_cluster)
 		raise Exception(errorMessage)
-	endTime = time.time()
+	#endTime = time.time()
 	return cluster
