@@ -20,9 +20,7 @@ Page to cite with work from: A. L. Garden, A. Pedersen, H. Jónsson, “Reassign
 
 The Nanocluster Interpolation Scheme Program (NISP) is designed to perform an interpolation scheme that can give an idea of icosahedral, decahedral, and octahedral clusters that can be formed with a given number of atoms. 
 
-This scheme is based on the work by Garden *et al.* as described in "Reassignment of ‘magic numbers’ for Au clusters of decahedral and FCC structural motifs", 
-
-	*A. L. Garden, A. Pedersen, H. Jónsson, “Reassignment of ‘magic numbers’ of decahedral and FCC structural motifs”, Nanoscale, 10, 5124-5132 (2018).*
+This scheme is based on the work by Garden *et al.* as described in "Reassignment of ‘magic numbers’ for Au clusters of decahedral and FCC structural motifs", A. L. Garden, A. Pedersen, H. Jónsson, “Reassignment of ‘magic numbers’ of decahedral and FCC structural motifs”, Nanoscale, 10, 5124-5132 (2018), [DOI: 10.1039/C7NR09440J](https://doi.org/10.1039/C7NR09440J)
 
 See https://doi.org/10.1039/C7NR09440J for more information on this scheme.
 

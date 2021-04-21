@@ -1,5 +1,5 @@
 #!/bin/bash -e
-#SBATCH -J AIS_Au_Gupta
+#SBATCH -J AIS_Cu_Gupta
 #SBATCH -A uoo00084         # Project Account
 
 #SBATCH --partition=large
@@ -20,4 +20,4 @@
 ######################
 
 module load Python/3.6.3-gimkl-2017a
-python Au_Interpolation_Script.py
+python Cu_Interpolation_Script.py

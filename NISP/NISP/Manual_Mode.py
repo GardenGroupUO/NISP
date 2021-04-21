@@ -1,5 +1,5 @@
 import os
-from shutil import rmtree
+from shutil import rmtree, copyfile
 from sys import exit
 
 from ase.io import write
@@ -11,12 +11,17 @@ from NISP.NISP.motif_methods import no_of_atoms_to_make_ico
 from NISP.NISP.motif_methods import no_of_atoms_to_make_deca
 from NISP.NISP.motif_methods import no_of_atoms_to_make_octa
 
-def write_files_for_manual_mode(element,e_coh,maximum_size,manual_mode,input_information_file):
+from NISP.NISP.Create_submitSL_slurm_Main import make_submitSL
+
+def write_files_for_manual_mode(element,e_coh,maximum_size,manual_mode,input_information_file,slurm_information=None):
 	if manual_mode.lower() == 'vasp':
 		manual_mode = 'vasp'
+		folder = 'VASP_Clusters'
 		filename_suffix = ''
-	elif manual_mode == 'xyz':
-		filename_suffix = '.xyz'
+	elif manual_mode.lower() == 'xyz':
+		manual_mode = 'xyz'
+		folder = 'Clusters'
+		filename_suffix = 'xyz'
 	else:
 		print('Error in def write_files_for_manual_mode, in Manual_Mode.py')
 		print('The entry for Manual Mode in the input_information dictionary must be one of the following:')
@@ -25,17 +30,19 @@ def write_files_for_manual_mode(element,e_coh,maximum_size,manual_mode,input_inf
 		print('\t* False  - Do not perform manual mode in NISP.')
 		print('Sort this out.')
 		exit('This program will finished without completing.')
-	folder = 'clusters'
 	if os.path.exists(folder):
 		rmtree(folder)
 	os.mkdir(folder)
-	write_start_of_manual_mode_file(element,maximum_size,input_information_file)
+	if manual_mode.lower() == 'xyz':
+		write_start_of_manual_mode_file(element,maximum_size,input_information_file)
 	write_icosahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_suffix,input_information_file,folder)
 	write_octahedral_cluster (element,e_coh,maximum_size,manual_mode,filename_suffix,input_information_file,folder)
 	write_decahedral_cluster (element,e_coh,maximum_size,manual_mode,filename_suffix,input_information_file,folder)
+	if manual_mode.lower() == 'vasp':
+		copy_VASP_files(folder,slurm_information)
 	print('Have finished making the '+str(input_information_file)+' file.')
 	print('Obtain the energies of the clusters that have been added to the '+str(folder)+' folder and then add these energies to associated cluster in the '+str(input_information_file)+' file.')
-	print('This program will not finish here')
+	print('This program will finish here')
 	exit()
 
 def write_start_of_manual_mode_file(element,maximum_size,input_information_file):
@@ -43,6 +50,30 @@ def write_start_of_manual_mode_file(element,maximum_size,input_information_file)
 		input_file.write('Element: '+str(element)+' Max_Size: '+str(maximum_size)+'\n')
 		input_file.write('Enter the energies of the clusters below to the right most of each line (not the delta energies, NISP can do that for you later)'+'\n')
 		input_file.write('------------------------------'+'\n')
+
+def get_diameter(cluster):
+	diameter_of_cluster = max(cluster.get_all_distances().flatten())
+	'''
+	diameter_of_cluster = 0.0
+	for index1 in range(len(cluster)):
+		for index2 in range(index1+1,len(cluster)):
+			distance = cluster.get_distance(index1,index2)
+			if distance > diameter_of_cluster:
+				diameter_of_cluster = distance
+	'''
+	return diameter_of_cluster
+
+def post_creating_cluster(cluster):
+	diameter_of_cluster = get_diameter(cluster)
+	cluster.center(vacuum=diameter_of_cluster*2.0)
+	cluster.set_pbc(False)
+
+def save_cluster_to_folder(folder,name,filename_suffix,manual_mode,cluster):
+	os.mkdir(folder+'/'+name)
+	if manual_mode == 'vasp':
+		write(folder+'/'+name+'/'+'POSCAR',cluster,format='vasp')
+	else:
+		write(folder+'/'+name+'/'+name+'.'+filename_suffix,cluster,format='xyz')
 
 def write_icosahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_suffix,input_information_file,folder):
 	print('============================================================')
@@ -58,13 +89,9 @@ def write_icosahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_su
 		# Make cluster
 		print('Make icosahedral cluster: '+str(no_atoms) + ' \tnoshells: ' + str(noshells))
 		cluster = Icosahedron(element,noshells=noshells)
-		cluster.center(vacuum=10.0)
-		name = 'Ico_'+str(no_atoms)+filename_suffix
-		if manual_mode == 'vasp':
-			os.mkdir(folder+'/'+name)
-			write(folder+'/'+name+'/'+'POSCAR',cluster,format='vasp')
-		else:
-			write(name,cluster,manual_mode)
+		post_creating_cluster(cluster)
+		name = 'Ico_'+str(no_atoms)
+		save_cluster_to_folder(folder,name,filename_suffix,manual_mode,cluster)
 		#---------------------------------------------------------------------------------
 		# make data for details
 		no_atoms = len(cluster)
@@ -103,13 +130,9 @@ def write_decahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_suf
 			#---------------------------------------------------------------------------------
 			# Make cluster
 			cluster = Decahedron(element,p=p,q=q,r=r)
-			cluster.center(vacuum=10.0)
-			name = 'Deca_'+str(p)+'_'+str(q)+'_'+str(r)+filename_suffix
-			if manual_mode == 'vasp':
-				os.mkdir(folder+'/'+name)
-				write(folder+'/'+name+'/'+'POSCAR',cluster,format='vasp')
-			else:
-				write(name,cluster,manual_mode)
+			post_creating_cluster(cluster)
+			name = 'Deca_'+str(p)+'_'+str(q)+'_'+str(r)
+			save_cluster_to_folder(folder,name,filename_suffix,manual_mode,cluster)
 			#---------------------------------------------------------------------------------
 			# make data for details
 			deca_parameters = (p,q,r)
@@ -153,13 +176,9 @@ def write_octahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_suf
 			#---------------------------------------------------------------------------------
 			# Make cluster
 			cluster = Octahedron(element,length=length,cutoff=cutoff)
-			cluster.center(vacuum=10.0)
-			name = 'Octa_'+str(length)+'_'+str(cutoff)+filename_suffix
-			if manual_mode == 'vasp':
-				os.mkdir(folder+'/'+name)
-				write(folder+'/'+name+'/'+'POSCAR',cluster,format='vasp')
-			else:
-				write(name,cluster,manual_mode)
+			post_creating_cluster(cluster)
+			name = 'Octa_'+str(length)+'_'+str(cutoff)
+			save_cluster_to_folder(folder,name,filename_suffix,manual_mode,cluster)
 			#---------------------------------------------------------------------------------
 			# make data for details
 			octa_parameters = (length,cutoff)
@@ -177,3 +196,44 @@ def write_octahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_suf
 		all_octa_details.sort()
 		for no_atoms, (length, cutoff) in all_octa_details:
 			input_file.write(str(no_atoms)+'\t'+str(length)+'\t'+str(cutoff)+'\t\n')
+
+def copy_VASP_files(folder,slurm_information):
+	vasp_files_folder = 'VASP_Files'
+	if not os.path.exists(vasp_files_folder):
+		print('Error in copying VASP files to cluster folder')
+		print('There is no folder called "VASP_Files" in your working directory.')
+		print('This folder is where you should place your VASP files in for DFT local optimisations.')
+		print('Make this folder and place your "POTCAR", INCAR", "KPOINTS" files for VASP local optimisations')
+		print('This program will exit without completing.')
+		exit()
+	VASP_Files_files = os.listdir(vasp_files_folder)
+	have_POTCAR  = 'POTCAR'  in VASP_Files_files
+	have_INCAR   = 'INCAR'   in VASP_Files_files
+	have_KPOINTS = 'KPOINTS' in VASP_Files_files
+	if not (have_POTCAR and have_INCAR and have_KPOINTS):
+		print('Error in copying VASP files to cluster folder')
+		print('You need the following files when you are performing VASP calculations:')
+		print()
+		print('\tPOTCAR:\t' +('You have this' if have_POTCAR  else 'You do not have this'))
+		print('\tINCAR:\t'  +('You have this' if have_INCAR   else 'You do not have this'))
+		print('\tKPOINTS:\t'+('You have this' if have_KPOINTS else 'You do not have this'))
+		print()
+		print('Check this out. This program will now end without completing.')
+		exit()
+	for root, dirs, files in os.walk(folder):
+		dirs.sort()
+		if not ('POSCAR' in files):
+			continue
+		print('Copying VASP files to '+root)
+		for file in ['POTCAR', 'INCAR', 'KPOINTS']:
+			copyfile(vasp_files_folder+'/'+file, root+'/'+file)
+		project = slurm_information['project']
+		time = slurm_information['time']
+		nodes = slurm_information['nodes']
+		ntasks_per_node = slurm_information['ntasks_per_node']
+		mem_per_cpu = slurm_information['mem-per-cpu']
+		partition = slurm_information['partition']
+		email = slurm_information['email']
+		vasp_version = slurm_information['vasp_version']
+		vasp_execution = slurm_information['vasp_execution']
+		make_submitSL(root,project,time,nodes,ntasks_per_node,mem_per_cpu,partition=partition,email=email,vasp_version=vasp_version,vasp_execution=vasp_execution)

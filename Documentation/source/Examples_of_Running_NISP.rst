@@ -4,8 +4,9 @@
 Examples of Running NISP with *Interpolation_Script.py*
 =======================================================
 
-.. raw:: html
-    :file: Images/binder_badge.svg
+.. image:: https://mybinder.org/badge_logo.svg
+   :target: https://mybinder.org/v2/gh/GardenGroupUO/NISP/main?urlpath=lab
+   :alt: Binder
 
 Provided in the NISP Github repository are examples of *Interpolation_Script.py* (and *RunMinimisation.py*, see :ref:`RunMinimisation.py - Writing a Local Minimisation Function for the Genetic Algorithm <Local_Minimisation_Function>` for more information about this file) scripts that you can try out. Find these various examples at https://github.com/GardenGroupUO/NISP/tree/main/Examples. 
 
@@ -15,7 +16,9 @@ Along with this Jupyter notebook, we have also implemented this Jupyter notebook
 
 The Binder webpage can be found at: 
 
-https://mybinder.org/v2/gh/GardenGroupUO/NISP/main?urlpath=lab
+.. image:: https://mybinder.org/badge_logo.svg
+   :target: https://mybinder.org/v2/gh/GardenGroupUO/NISP/main?urlpath=lab
+   :alt: Binder
 
 This will load a Binder page that will allow you to play about with NISP interactively in Binder. This Binder page may load quickly, or it may take 1 to 2 minutes to load. Don't refresh the page as Binder takes a good amount of time to load. Get a coffee or a cup of tea while you wait. 
 

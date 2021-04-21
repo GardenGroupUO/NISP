@@ -6,7 +6,6 @@ input_information['Element Type'] = 'Pt'
 input_information['Cohesive Energy'] = -5.89233884824
 input_information['Maximum No. of Atoms'] = 1000
 input_information['Local Optimiser'] = Minimisation_Function
-input_information['Manual Mode'] = False
 
 output_information = {}
 output_information['Upper No of Atom Range']   = 450

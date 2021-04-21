@@ -12,23 +12,15 @@
 print('Loading matplotlib')
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
-print('Loading nanocluster modules')
-from NISP.NISP.Cluster import get_cluster, Cluster
 print('Loading the interpolation rules')
 from NISP.NISP.Interpolation_rules import Rule_deca_reent, Rule_deca_plane, Rule_deca_111
 from NISP.NISP.Interpolation_rules import Rule_octa_111, Rule_octa_fcc
 from NISP.NISP.Interpolation_rules import Rule_ico
 print('Loading Connection modules')
 from NISP.NISP.Interpolation_Connection import make_connection
-print('Loading icosahedral, decahedral, and octahedral methods')
-from NISP.NISP.motif_methods import no_of_atoms_to_make_ico
-from NISP.NISP.motif_methods import no_of_atoms_to_make_deca
-from NISP.NISP.motif_methods import no_of_atoms_to_make_octa
-print('Loading methods for manual mode')
-from NISP.NISP.Manual_Mode import write_files_for_manual_mode
 print('Loading os, timing, and multiprocessing modules')
+
 import os, time
-import multiprocessing as mp
 from sys import exit
 print('Beginning Interpolation Program')
 
@@ -58,7 +50,7 @@ class Run_Interpolation_Scheme:
 		self.e_coh = self.input_information['Cohesive Energy']
 		self.maximum_size = self.input_information['Maximum No. of Atoms']
 		self.local_optimiser = check_value('Local Optimiser',self.input_information,None)
-		self.manual_mode = check_value('Manual Mode',self.input_information,False)
+		self.check_local_optimiser_entry()
 		self.no_of_cpus = no_of_cpus
 		self.filename_prefix = filename_prefix
 		if self.filename_prefix == '':
@@ -67,6 +59,105 @@ class Run_Interpolation_Scheme:
 		results_file_suffix = '_atoms_interpolation_scheme_results_file.txt'
 		self.input_information_file    = self.filename_prefix + input_file_suffix
 		self.delta_energy_results_file = self.filename_prefix + results_file_suffix
+
+	def check_local_optimiser_entry(self):
+		if isinstance(self.local_optimiser,str):
+			self.local_optimiser = self.local_optimiser.lower()
+			if self.local_optimiser == 'vasp':
+				self.get_slurm_information()
+			elif self.local_optimiser == 'manual mode':
+				pass
+
+	def get_slurm_information(self):
+		self.slurm_information = check_value('Slurm Information',self.input_information,None)
+		if (self.slurm_information == None) or (not isinstance(self.slurm_information,dict)):
+			print('=====================================================================')
+			print('Error in the Slurm Information given')
+			print()
+			if self.slurm_information == None:
+				print('You have not given an input for Slurm Information in the input_information dictionary.')
+				print('You need to give a dictionary that gives the information required for the submit.sl files for running VASP calculations in slurm.')
+			elif not isinstance(self.slurm_information,dict):
+				print('The Slurm Information input needs to be a dictionary that includes all the information required to create the submit.sl files for running VASP calculations in slurm.')
+				print('You have set the Slurm Information input as:'+str(self.slurm_information))
+			print()
+			print('See XXX for more information about what to put in for this dictionary.')
+			print()
+			print('This program will finish without completing')
+			print('=====================================================================')
+			exit()
+		enteries_to_check = ['project','time','nodes','ntasks_per_node','mem-per-cpu']
+		issues = []
+		for entry_to_check in enteries_to_check:
+			issues.append(not entry_to_check in self.slurm_information)
+		if any(issues):
+			print('=====================================================================')
+			print('Error in the Slurm Information given')
+			print()
+			print('You need to include the following in your Slurm Information:')
+			print()
+			for index in range(len(enteries_to_check)):
+				entry_to_check = enteries_to_check[index]
+				issue = issues[index]
+				print(entry_to_check+': '+str('You have this' if issue else 'You have not included this. You need to give this'))
+			print()
+			print('See XXX for more information about what to put in for this dictionary.')
+			print()
+			print('This program will finish without completing')
+			print('=====================================================================')
+			exit()
+		inputs_to_check = (('partition', 'large'), ('email', ''), ('vasp_version', 'VASP/5.4.4-intel-2017a'), ('vasp_execution', 'vasp_std'))
+		for input_to_check, default in inputs_to_check:
+			if not input_to_check in self.slurm_information:
+				self.slurm_information[input_to_check] = default
+
+	# ------------------------------------------------------------------------------------------------------------------------------
+	# The following defs are for obtaining the delta energies of all combinations of icosahedral, decahedral and octahedral clusters 
+
+	def get_input_data(self):
+		if self.local_optimiser == 'vasp':
+			if os.path.exists(self.delta_energy_results_file):
+				# If data has already been obtained, get data from file
+				self.input_from_file(self.delta_energy_results_file,False)	
+			elif 'VASP_Clusters' in os.listdir('.'):
+				# Get all the information that is needed from processing all VASP calculations
+				self.input_from_procesed_VASP_files()	
+			else:
+				# Write all the files that are needed to run VASP calculations on
+				self.write_files_for_manual_or_vasp_entry('vasp',self.slurm_information)
+		elif self.local_optimiser == 'manual mode':
+			if os.path.exists(self.delta_energy_results_file):
+				# If data has already been obtained, get data from file
+				self.input_from_file(self.input_information_file,True)	
+			else:
+				# write all the files that are needed for a manual entry of data
+				self.write_files_for_manual_or_vasp_entry('xyz',None)
+		else:
+			if os.path.exists(self.delta_energy_results_file):
+				# If data has already been obtained, get data from file
+				self.input_from_file(self.delta_energy_results_file,False)
+			else:
+				# Perform calculation with ASE based calculator
+				self.input_with_calculator()
+
+	def input_from_procesed_VASP_files(self):
+		from NISP.NISP.input_from_procesed_VASP_files import input_from_procesed_VASP_files
+		self.ico_data, self.magic_numbers, self.octa_data, self.octa_magic, self.deca_data, self.deca_magic = input_from_procesed_VASP_files(self.element,self.local_optimiser,self.e_coh,self.maximum_size)
+
+	def write_files_for_manual_or_vasp_entry(self,writing_format,slurm_information):
+		from NISP.NISP.Manual_Mode import write_files_for_manual_mode
+		write_files_for_manual_mode(self.element,self.e_coh,self.maximum_size,writing_format,self.input_information_file,slurm_information=slurm_information)
+
+	def input_with_calculator(self):
+		from NISP.NISP.get_interpolation_data_from_ase_calculator import get_interpolation_data_from_ase_calculator
+		self.ico_data, self.magic_numbers, self.octa_data, self.octa_magic, self.deca_data, self.deca_magic = get_interpolation_data_from_ase_calculator(self.element,self.local_optimiser,self.e_coh,self.maximum_size,self.no_of_cpus)
+
+	def input_from_file(self,input_file,manual_mode_file_found):
+		from NISP.NISP.get_interpolation_data_from_ase_from_file import get_interpolation_data_from_ase_from_file
+		self.ico_data, self.magic_numbers, self.deca_data, self.deca_magic, self.octa_data, self.octa_magic, self.element, self.maximum_size = get_interpolation_data_from_ase_from_file(input_file,manual_mode_file_found)
+
+	# ------------------------------------------------------------------------------------------------------------------------------
+	# Set up all the inputs required to make plots and other data from the interpolation scheme
 
 	def setup_for_running_interpolation(self,output_information,filename_prefix):
 		self.output_information = output_information
@@ -89,254 +180,6 @@ class Run_Interpolation_Scheme:
 		self.higherDERange     = check_value('Upper Delta Energy Range',self.output_information,None) 
 		self.lowerDERange      = check_value('Lower Delta Energy Range',self.output_information,None) 
 		# -----------------------------------------------------------------
-
-	# ------------------------------------------------------------------------------------------------------------------------------
-	# The following def will write all the files that you need for manual mode
-
-	def write_manual_files(self):
-		write_files_for_manual_mode(self.element,self.e_coh,self.maximum_size,self.manual_mode,self.input_information_file)
-
-	# ------------------------------------------------------------------------------------------------------------------------------
-	# The following defs are for obtaining the delta energies of all combinations of icosahedral, decahedral and octahedral clusters 
-
-	def get_input_data(self):
-		if os.path.exists(self.delta_energy_results_file):
-			self.input_from_file(self.delta_energy_results_file,False)
-		elif self.manual_mode and os.path.exists(self.input_information_file):
-			self.input_from_file(self.input_information_file,   True)
-		elif not (self.manual_mode in [False,'F','f','false','FALSE','False']):
-			self.write_manual_files()
-		else:
-			self.input_with_calculator()
-
-	def input_with_calculator(self):
-		self.ico_data,  self.magic_numbers = self.Get_Energies_Of_Icosahedrons()
-		self.octa_data, self.octa_magic    = self.Get_Energies_Of_Octahedrals()
-		self.deca_data, self.deca_magic    = self.Get_Energies_Of_Decahedrals()
-		
-	# This will obtain all the delta energies of all the icosahedral clusters that can be made with a cluster number less than 
-	# an atom size of maximum_size. 
-	def Get_Energies_Of_Icosahedrons(self):
-		print('============================================================')
-		print('Starting Obtaining Icosahedral Delta Energies')
-		print('no atoms\tno of shells')
-		noshells = 2
-		magic_numbers = []
-		tasks = []
-		while True:
-			no_atoms = no_of_atoms_to_make_ico(noshells)
-			if no_atoms > self.maximum_size:
-				break
-			print(str(no_atoms) + ' \tnoshells: ' + str(noshells))
-			tasks.append(['Icosahedron',[noshells],self.element,self.local_optimiser,self.e_coh,no_atoms])
-			magic_numbers.append(no_atoms)
-			noshells += 1
-		for index in range(len(tasks)):
-			#task = tasks[index]
-			tasks[index] = tuple(tasks[index] + [len(tasks)])
-		print('============================================================')
-		print('Performing Tasks')
-		start_time = time.time()
-		ico_data = self.obtain_cluster_data(tasks)
-		end_time = time.time()
-		print('Time taken to get Icosahedral data was '+str(end_time - start_time)+' s.')
-		print('Ending Obtaining Icosahedral Delta Energies')
-		print('============================================================')
-		return ico_data, magic_numbers
-
-	# This will obtain all the delta energies of all the decahedral clusters that can be made with a cluster number less than 
-	# an atom size of maximum_size. 
-	def Get_Energies_Of_Decahedrals(self):
-		print('============================================================')
-		print('Starting Obtaining Decahedral Delta Energies')
-		print('no atoms\tp\tq\tr')
-		P_START = 2; Q_ORIGINAL = 1; R_ORIGINAL = 0
-		
-		p = P_START # p is the atom length along the 100_face_normal_to_5_fold_axis
-		q = Q_ORIGINAL # q is the atom length along the 100_face_parallel_to_5_fold_axis
-		r = R_ORIGINAL # r is the marks_reenterance_depth
-		#previous_value_of_r = -1
-		#deca_data = []; 
-		deca_magic = []
-		tasks = []
-		while True:
-			no_atoms = no_of_atoms_to_make_deca(p,q,r)
-			if (r == R_ORIGINAL and q == Q_ORIGINAL) and (no_atoms > self.maximum_size):
-				break
-			previous_value_of_r = r 
-			# From now on, at some point r (and potenitally p and q) will be modified to reflect that for the next cluster to sample
-			if no_atoms <= self.maximum_size:
-				print(str(no_atoms) + '\t\tp: ' + str(p) + ' \tq: ' + str(q) + ' \tr: ' + str(r))# + '\t,Calculate: ' + str(no_atoms < maximum_size) + '\t,previous r: ' + str(previous_value_of_r)
-				deca_details = [p,q,r]
-				tasks.append(['Decahedron',deca_details,self.element,self.local_optimiser,self.e_coh,no_atoms])
-				r += 1 # r is now the value of r for the next cluster that will be made using this algorithm.
-				if (r > q + 3):
-					r = 0; q += 1
-			else:
-				r = 0; q += 1 # r and q are changed to reflect the next cluster
-			if (q > p + 3) or (previous_value_of_r == 0 and r == 0):
-				q = 1; p += 1 # p and q are changed to reflect the next cluster
-		for index in range(len(tasks)):
-			#task = tasks[index]
-			tasks[index] = tuple(tasks[index] + [len(tasks)])
-		print('============================================================')
-		print('Performing Tasks')
-		start_time = time.time()
-		deca_data = self.obtain_cluster_data(tasks)
-		deca_magic = self.obtain_cluster_magic_data(deca_data)
-		end_time = time.time()
-		print('Time taken to get Decahedral data was '+str(end_time - start_time)+' s.')
-		print('Ending Starting Obtaining Decahedral Delta Energies')
-		print('============================================================')
-		return deca_data, deca_magic
-
-	# This will obtain all the delta energies of all the octahedral clusters that can be made with a cluster number less than 
-	# an atom size of maximum_size. 
-	def Get_Energies_Of_Octahedrals(self):
-		def get_max_cutoff_value(length):
-			max_cutoff = (length-1.0)/2.0 - 0.5*((length-1.0)%2.0)
-			if not max_cutoff%1 == 0:
-				print('Error in Get_Interpolation_Data, at def Get_Energies_Of_Octahedrals, at def get_max_cutoff_value: max_cutoff did not come out as an interger.\nCheck this.\nmax_cutoff = '+str(max_cutoff))
-				import pdb; pdb.set_trace()
-				exit()
-			return int(max_cutoff)
-		print('============================================================')
-		print('Starting Obtaining Octahedral Delta Energies')
-		print('no atoms\tlength\tcutoff')
-		length = 2; cutoff = get_max_cutoff_value(length); cutoff_max = cutoff
-		#octa_data = []; 
-		octa_magic = []
-		tasks = []
-		while True:
-			no_atoms = no_of_atoms_to_make_octa(length,cutoff)
-			if (no_atoms > self.maximum_size) and (cutoff == cutoff_max):
-				break
-			if no_atoms <= self.maximum_size:
-				print(str(no_atoms)+' \tlength: ' + str(length) + ' \tcutoff = ' + str(cutoff))
-				octa_details = [length,cutoff]
-				tasks.append(['Octahedron',octa_details,self.element,self.local_optimiser,self.e_coh,no_atoms])
-			cutoff -= 1
-			if cutoff < 0 or no_atoms > self.maximum_size:
-				length += 1
-				cutoff = get_max_cutoff_value(length)
-				cutoff_max = cutoff
-		for index in range(len(tasks)):
-			#task = tasks[index]
-			tasks[index] = tuple(tasks[index] + [len(tasks)])
-		print('============================================================')
-		print('Performing Tasks')
-		start_time = time.time()
-		octa_data  = self.obtain_cluster_data(tasks)
-		octa_magic = self.obtain_cluster_magic_data(octa_data)
-		end_time = time.time()
-		print('Time taken to get Octahedral data was '+str(end_time - start_time)+' s.')
-		print('Ending Obtaining Octahedral Delta Energies')
-		print('============================================================')
-		return octa_data, octa_magic
-
-	def obtain_cluster_data(self,tasks):
-		if self.no_of_cpus > 1:
-			pool = mp.Pool(processes=self.no_of_cpus)
-			manager = mp.Manager()
-			counter = manager.Value('i', 0)
-			tasks = [(task+(counter,)) for task in tasks]
-			results = pool.map_async(get_cluster, tasks)
-			results.wait()
-			pool.close()
-			pool.join()
-			data = results.get()
-		else:
-			from NISP.NISP.Counter import Counter
-			counter = Counter()
-			data = [get_cluster(task+(counter,)) for task in tasks]
-		return data
-
-	def obtain_cluster_magic_data(self,data):
-		magic = []
-		for cluster in data:
-			no_atoms = cluster.no_atoms
-			if no_atoms in self.magic_numbers:
-				magic.append(cluster) 
-		return magic
-
-
-
-
-	def input_from_file(self,input_file,manual_mode_file_found):
-		print('--------------------------------------------------')
-		if manual_mode_file_found:
-			print('Found the file called '+str(input_file))
-			print('This file was made because you want to run NISP in manual mode')
-			print()
-			print('To be used, it needs to contain:')
-			print('\t* The various perfect closed shell icosahedral, decahedral, and octahedral clusters.')
-			print('\t* The parameters used to make those clusters')
-			print('\t* You need to enter the energy of the clusters after these')
-		else:
-			print('Found the file called '+str(input_file))
-			print('This file was made from the first time you ran the interpolation scheme')
-			print()
-			print('This file contained all the information required to perform the interpolation scheme')
-			print('It contains:')
-			print('\t* The various perfect closed shell icosahedral, decahedral, and octahedral clusters.')
-			print('\t* The parameters used to make those clusters')
-			print('\t* The delta energy of the cluster with your chosen potential')
-		print('--------------------------------------------------')
-		self.ico_data  = []; self.magic_numbers = []
-		self.deca_data = []; self.deca_magic = []
-		self.octa_data = []; self.octa_magic = []
-		self.maximum_size = -1
-		motif_type = ''; #inputting = None
-		with open(input_file,'r') as file:
-			text_details = file.readline()
-			self.element = text_details.split()[1]
-			self.maximum_size = int(text_details.split()[3])
-			if manual_mode_file_found:
-				file.readline()
-			file.readline()
-			line_count = 0
-			for line in file:
-				line_count += 1
-				if line == 'Icosahedron\n':
-					inputting = self.ico_data
-					motif_type = 'Icosahedron'
-				elif line == 'Decahedron\n':
-					inputting = self.deca_data
-					motif_type = 'Decahedron'
-				elif line == 'Octahedron\n':
-					inputting = self.octa_data
-					motif_type = 'Octahedron'
-				else:
-					datum = line.rstrip().split('\t')
-					noAtoms = int(datum[0])
-					if noAtoms > self.maximum_size:
-						self.maximum_size = noAtoms
-					try:
-						if motif_type == 'Icosahedron':
-							motif_details = [int(datum[1])]
-							delta_energy  =  float(datum[2])
-						elif motif_type == 'Decahedron':
-							motif_details = [int(datum[1]), int(datum[2]), int(datum[3])]
-							delta_energy  =  float(datum[4])
-						elif motif_type == 'Octahedron':
-							motif_details = [int(datum[1]), int(datum[2])]
-							delta_energy  = float(datum[3])
-					except IndexError as exception_message:
-						if manual_mode_file_found:
-							tostring  = 'Error when inputting data from '+str(input_file)+'.\n'
-							tostring += 'One of your entries in this file was not filled in completely.\n'
-							tostring += 'Check line '+str(line_count)+' of '+str(input_file)+' and see if you have filled this in completely.\n'
-							tostring += str(exception_message)
-							raise IndexError(tostring)
-						else:
-							raise IndexError(exception_message)
-					#motif_details = eval('['+','.join(datum[1:-1])+']')
-					#delta_energy = float(datum[-1].split('\n')[0])
-					cluster = Cluster(motif_type,motif_details,no_atoms=noAtoms,delta_energy=delta_energy)
-					inputting.append(cluster)
-		self.magic_numbers = [x.no_atoms for x in self.ico_data]
-		self.deca_magic = [x for x in self.deca_data if x.no_atoms in self.magic_numbers]
-		self.octa_magic = [x for x in self.octa_data if x.no_atoms in self.magic_numbers]
 
 	# ------------------------------------------------------------------------------------------------------------------------------
 
@@ -456,11 +299,15 @@ class Run_Interpolation_Scheme:
 		                Line2D([0], [0], color='blue', lw=1),
 		                Line2D([0], [0], color='blue', lw=1, linestyle='-.')]
 		custom_names = ['Icosahedron','Decahedron Rule 1','Decahedron Rule 2','Octahedron Rule 1','Octahedron Rule 2']
-		ax1.set_xlabel('No of Atoms in Cluster')
-		ax1.set_ylabel(r'$\Delta$ (eV)')
+		fontsize_label = 20
+		ax1.set_xlabel('No. of Atoms (#)', fontsize=fontsize_label)
+		ax1.set_ylabel(r'$\Delta$ ($eV$)', fontsize=fontsize_label)
+		fontsize_ticks = 16
+		ax1.tick_params(axis='both', which='major', labelsize=fontsize_ticks)
 		ax1.set_xlim(left=self.lowerNoAtomRange,right=self.higherNoAtomRange)
 		ax1.set_ylim(bottom=self.lowerDERange,top=self.higherDERange)
 		plt.legend(custom_lines,custom_names,loc='best',fancybox=True,framealpha=1, shadow=True, borderpad=1)
+		plt.tight_layout()
 		plt.savefig(self.filename_prefix + '_Interpolation_Scheme.png')
 		plt.savefig(self.filename_prefix + '_Interpolation_Scheme.svg')
 

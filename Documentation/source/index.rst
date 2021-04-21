@@ -32,7 +32,7 @@ Welcome to the Nanocluster Interpolation Scheme Program (NISP) documentation!
 
 
 .. image:: https://mybinder.org/badge_logo.svg
-   :target: https://mybinder.org/v2/gh/GardenGroupUO/Organisms_Jupyter_Examples/main?urlpath=lab
+   :target: https://mybinder.org/v2/gh/GardenGroupUO/NISP/main?urlpath=lab
    :alt: Binder
 
 
@@ -44,6 +44,11 @@ Welcome to the Nanocluster Interpolation Scheme Program (NISP) documentation!
 .. .. image:: https://img.shields.io/lgtm/grade/python/github/GardenGroupUO/NISP
      :target: https://lgtm.com/projects/g/GardenGroupUO/NISP/context:python
      :alt: LGTM Grade
+
+.. sectionauthor:: Dr. Anna Garden <anna.garden@otago.ac.nz>
+.. sectionauthor:: Geoffrey Weal <geoffrey.weal@gmail.com>
+.. sectionauthor:: Dr. Andreas Pedersen
+.. sectionauthor:: Prof. Hannes Jónsson <hj@hi.is>
 
 Group page: https://blogs.otago.ac.nz/annagarden/
 
@@ -58,13 +63,15 @@ This documentation is designed to guide the user to use the Nanocluster Interpol
 What is NISP
 ============
 
-The NISP program is an interpolation scheme that creates all the perfect, close shell icosahedral, decahedral, and octahedral clusters that can be created between 13 atoms and an upper atom number limit. These clusters are locally optimised using either an ASE or ASE-integrated calculator or with VASP before the delta energy is obtained. 
+The NISP program is an interpolation scheme that is designed to give an approximate guide for the estimated energies of unsymmetric nanoclusters based on energetic trends between perfect, closed-shell nanoclusters. This program will create all the perfect, close shell icosahedral, decahedral, and octahedral clusters that can be created between 13 atoms and an upper atom number limit. These nanoclusters are locally optimised using either an ASE, an ASE-integrated calculator, or with VASP. After the nanoclusters are locally optimised, the delta energy is obtained for each nanocluster before providing plots and text files that indicate the estimated energies of perfect, closed-shell and unsymmetric nanoclusters and how to remove atoms from the larger perfect closed-shell nanocluster to give unsymmetric nanoclusters with a certain number of atoms. See “Reassignment of ‘magic numbers’ of decahedral and FCC structural motifs” (`DOI: 10.1039/C7NR09440J <https://doi.org/10.1039/C7NR09440J>`_) for more information about how this interpolation scheme works. 
 
 The algorithm was designed by Dr Anna Garden of the University of Otago, Dunedin, New Zealand, and Dr. Andreas Pedersen and Prof. Hannes Jónsson of the University of Iceland. The Github page for this program can be found at `github.com/GardenGroupUO/NISP <https://github.com/GardenGroupUO/NISP>`_. 
 
-Dr Anna Garden: `blogs.otago.ac.nz/annagarden <https://blogs.otago.ac.nz/annagarden/>`_
-Dr Andreas Pedersen: `https://dk.linkedin.com/in/andreas-pedersen-a847025 <https://dk.linkedin.com/in/andreas-pedersen-a847025>`_
-Prof Hannes Jónsson: `english.hi.is/staff/hj <https://english.hi.is/staff/hj>`_
+Dr. Anna Garden: `blogs.otago.ac.nz/annagarden <https://blogs.otago.ac.nz/annagarden/>`_
+
+Dr. Andreas Pedersen: `https://dk.linkedin.com/in/andreas-pedersen-a847025 <https://dk.linkedin.com/in/andreas-pedersen-a847025>`_
+
+Prof. Hannes Jónsson: `english.hi.is/staff/hj <https://english.hi.is/staff/hj>`_
 
 Try Organisms before you Clone/Pip/Conda (on Binder/Jupter Notebooks)!
 ======================================================================
@@ -97,6 +104,7 @@ Table of Contents
    How_to_obtain_cohesive_energies
    How_To_Manually_Enter_Energy_Results_Into_NISP
    Examples_of_Running_NISP
+   HelpfulPrograms_Subsidiary_Programs
    NISP_Files
    genindex
    py-modindex
