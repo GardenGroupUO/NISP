@@ -54,9 +54,9 @@ The second plot is the same nterpolation scheme plot shown above, but with lines
 	<img src="https://github.com/GardenGroupUO/NISP/blob/main/Documentation/source/results/Au_Max_Size_2000_Interpolation_Scheme_with_lines.png">
 </p>
 
-There are also text document that contain the delta energies of the various nanoclusters that you calculated, as well as instructions about how to remove atoms from certain nanoclusters in order to get icosahedral, decahedral, and octahedral nanoclusters with the particular number of atoms that you desire. [Click here to see examples of all of these plots and text files.](https://github.com/GardenGroupUO/NISP/tree/main/Documentation/source)
+There are also text documents that contain the delta energies of the various nanoclusters that you calculated, as well as instructions about how to remove atoms from certain nanoclusters in order to get icosahedral, decahedral, and octahedral nanoclusters with the particular number of atoms that you desire. [Click here to see examples of all of these plots and text files.](https://github.com/GardenGroupUO/NISP/tree/main/Documentation/source)
 
-## Where can I find the documentation for Organisms
+## Where can I find the documentation for NISP
 
 All the information about this program is found online at [nisp.readthedocs.io/en/latest/](https://nisp.readthedocs.io/en/latest/). Click the button below to also see the documentation: 
 
