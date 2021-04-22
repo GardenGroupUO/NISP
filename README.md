@@ -40,7 +40,7 @@ It is recommended to read the installation page before using the NISP program.
 
 Note that you can install NISP through ``pip3`` and ``conda``. See the [installation instructions](https://nisp.readthedocs.io/en/latest/Installation.html) on how to do this. 
 
-## Output files that are created by GeoProps
+## Output files that are created by NISP
 
 Examples of the plots that are created are shown below. The first of these is the interpolation scheme plot, which shows all the estimated energies of nanoclusters across the size range of nanoclusters that you are measuring across. An example of this for Au nanoclusters, using the RGL potetial with parameters from Baletto *et al.* ([DOI: 10.1063/1.1448484](https://doi.org/10.1063/1.1448484)), is shown below:
 
