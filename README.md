@@ -40,6 +40,22 @@ It is recommended to read the installation page before using the NISP program.
 
 Note that you can install NISP through ``pip3`` and ``conda``. See the [installation instructions](https://nisp.readthedocs.io/en/latest/Installation.html) on how to do this. 
 
+## Output files that are created by GeoProps
+
+Examples of the plots that are created are shown below. The first of these is the interpolation scheme plot, which shows all the estimated energies of nanoclusters across the size range of nanoclusters that you are measuring across. An example of this for Au nanoclusters, using the RGL potetial with parameters from Baletto *et al.* ([DOI: 10.1063/1.1448484](https://doi.org/10.1063/1.1448484)), is shown below:
+
+<p align="center">
+	<img src="https://github.com/GardenGroupUO/GeoProps/blob/main/Documentation/source/results/Au_Max_Size_2000_Interpolation_Scheme.png">
+</p>
+
+The second plot is the same nterpolation scheme plot shown above, but with lines through it at the places that you want to obtain cluster with the particular number of atoms that you desire. 
+
+<p align="center">
+	<img src="https://github.com/GardenGroupUO/GeoProps/blob/main/Documentation/source/results/Au_Max_Size_2000_Interpolation_Scheme_with_lines.png">
+</p>
+
+There are also text document that contain the delta energies of the various nanoclusters that you calculated, as well as instructions about how to remove atoms from certain nanoclusters in order to get icosahedral, decahedral, and octahedral nanoclusters with the particular number of atoms that you desire. [Click here to see examples of all of these plots and text files.](https://github.com/GardenGroupUO/NISP/tree/main/Documentation/source)
+
 ## Where can I find the documentation for Organisms
 
 All the information about this program is found online at [nisp.readthedocs.io/en/latest/](https://nisp.readthedocs.io/en/latest/). Click the button below to also see the documentation: 
