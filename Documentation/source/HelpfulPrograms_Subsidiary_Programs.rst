@@ -12,8 +12,6 @@ The scripts and programs that we will be mentioned here are:
     :depth: 1
     :local:
 
-There is also information on how to generate multiple trials of your genetic algorithm experiment on mass at :ref:`MakeTrials.py - Creating Multiple, Repeated Genetic Algorithm Trials <Using_MakeTrials>`. 
-
 .. _What_to_make_sure_is_done_before_running_any_of_these_scripts:
 
 What to make sure is done before running any of these scripts. 

@@ -17,12 +17,12 @@ Because of this flexibility, it is possible to use any type of calculator from A
 
 If you want to use VASP to perform local optimisation calculations, see :ref:`How to perform NISP with VASP calculations <How_To_VASP_In_NISP>`. If you want to use another long running programming like Quantum Espresso, you will need to enter in cluster energies from the program you use into NISP manually. See :ref:`How to manually enter energy results into NISP <How_To_Manually_Enter_Energy_Results_Into_NISP>` for more information. 
 
-In the following documentation we will describe how the ``Minimisation_Function`` method is designed in a **RunMinimisation.py** file, and how you can make your own. Examples of **RunMinimisation.py** files can be found in `github.com/GardenGroupUO/NISP <https://github.com/GardenGroupUO/NISP>`_ in the directory path ``Examples`` (this should be found in `github.com/GardenGroupUO/NISP/tree/main/Examples <https://github.com/GardenGroupUO/Organisms/tree/main/Examples>`_). 
+In the following documentation we will describe how the ``Minimisation_Function`` method is designed in a ``RunMinimisation.py`` file, and how you can make your own. Examples of ``RunMinimisation.py`` files used in NISP runs can be found in `github.com/GardenGroupUO/NISP <https://github.com/GardenGroupUO/NISP>`_ in the directory path ``Examples`` (this should be found in `github.com/GardenGroupUO/NISP/tree/main/Examples <https://github.com/GardenGroupUO/NISP/tree/main/Examples>`_). 
 
 Where to write the Minimisation_Function
 ****************************************
 
-The ``Minimisation_Function`` can be written into the Run.py file. However, as a personal preference and also to make the code cleaner to read, write and use, I put it into another python file. This file I have called **RunMinimisation.py**. This does not need to be the name of this file. For example, I have named this file **RunMinimisation_AuPd.py** when I wanted to keep a record that this minimisation python file contained the Gupta parameters and code for locally minimising a cluster using the Gupta potential for a cluster containing Au and Pd atoms. 
+The ``Minimisation_Function`` can be written into the Run.py file. However, as a personal preference and also to make the code cleaner to read, write and use, I put it into another python file. This file I have called ``RunMinimisation.py``. This does not need to be the name of this file. For example, I have named this file ``RunMinimisation_AuPd.py`` when I wanted to keep a record that this minimisation python file contained the Gupta parameters and code for locally minimising a cluster using the Gupta potential for a cluster containing Au and Pd atoms. 
 
 Furthermore, the def ``Minimisation_Function`` does not even need to be called ``Minimisation_Function``. It could be called ``TheGuptaFunction``, ``the_local_minimisation_function``, or ``The_Electric_Eel_Function``. Again, I have just always called it ``Minimisation_Function`` for simplicity and for ease when using different ``Interpolation_Script.py`` files with different ``Minimisation_Function`` codes. 
 
@@ -35,7 +35,7 @@ However, it is important that this code is referenced somehow in your ``Interpol
 	# the local optimisations. This is meant to be as free as possible.
 	from RunMinimisation import Minimisation_Function
 
-where, in the above code, ``RunMinimisation`` is the name of the file the local minimisation code is found in (This file is called **RunMinimisation.py**), and ``Minimisation_Function`` is the name of the function that is found in the **RunMinimisation.py**. If you do it like this, make sure that your **RunMinimisation.py** file is in the same folder as your Run.py file. 
+where, in the above code, ``RunMinimisation`` is the name of the file the local minimisation code is found in (This file is called ``RunMinimisation.py``), and ``Minimisation_Function`` is the name of the function that is found in the ``RunMinimisation.py``. If you do it like this, make sure that your ``RunMinimisation.py`` file is in the same folder as your Run.py file. 
 
 
 How to write the Minimisation_Function
@@ -51,7 +51,7 @@ returns:
 
 * **cluster** (*ase.Atoms*) - This is the optimised version of the cluster. 
 
-An example of a RunMinimisation.py file for a Gupta potential involving only Cu atoms is given below:
+An example of a RunMinimisation.py file for a Gupta potential involving only Au atoms is given below:
 
 .. literalinclude:: RunMinimisation.py
 	:language: python
@@ -107,11 +107,7 @@ See below for a example:
 Executing the local optimiser
 -----------------------------
 
-We would like to now get the definition to run a local optimisation. This is done by performing ``dyn.run(fmax=0.01,steps=5000)``. Included in this definition are try and 
-
-
-
-However I have found that if something breaks for some reason during the optimisation, this can completely stop NISP in its tracks, and cause it to finish with a fatal error. You may want this to happen so that you can address issues when they arise, but sometimes it is hard to continue to work when it keeps happening. If you would like, you can make sure NISP does not fail entirely by adding a Error Handling block, as shown in the example below:
+We would like to now get the definition to run a local optimisation. This is done by performing ``dyn.run(fmax=0.01,steps=5000)``. However I have found that if something breaks for some reason during the optimisation, this can completely stop the genetic algorithm in its tracks, and cause it to finish with a fatal error. You may want this to happen so that you can address issues when they arise, but sometimes it is hard to continue to work when it keeps happening. If you would like, you can make sure the genetic algorithm does not fail entirely by adding a Error Handling block, as shown in the example below:
 
 .. literalinclude:: RunMinimisation.py
 	:language: python
@@ -122,6 +118,7 @@ However I have found that if something breaks for some reason during the optimis
 	:dedent: 4
 
 You can also see that I have placed an if statement to determine if the local optimsation actually converged. I have found that it is useful to include a way of noting if the optimisation was able to converge or not. See more about `How to perform a local optimisation in ASE here <https://wiki.fysik.dtu.dk/ase/ase/optimize.html>`_, or refer to the manual of the local optimiser you are using for more information on how to do this.
+
 
 Return the Optimised Cluster and Info
 -------------------------------------

@@ -1,5 +1,5 @@
 
-.. _Examples_of_Running_GA:
+.. _Examples_of_Running_NISP:
 
 Examples of Running NISP with *Interpolation_Script.py*
 =======================================================

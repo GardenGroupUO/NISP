@@ -13,7 +13,10 @@ from NISP.NISP.motif_methods import no_of_atoms_to_make_octa
 
 from NISP.NISP.Create_submitSL_slurm_Main import make_submitSL
 
-def write_files_for_manual_mode(element,e_coh,maximum_size,manual_mode,input_information_file,slurm_information=None):
+atom_writing = 8
+details_writing = 12
+
+def write_files_for_manual_mode(element,e_coh,maximum_size,manual_mode,input_information_file,slurm_information=None,sort_manual_mode_by='base details'):
 	if manual_mode.lower() == 'vasp':
 		manual_mode = 'vasp'
 		folder = 'VASP_Clusters'
@@ -35,9 +38,9 @@ def write_files_for_manual_mode(element,e_coh,maximum_size,manual_mode,input_inf
 	os.mkdir(folder)
 	if manual_mode.lower() == 'xyz':
 		write_start_of_manual_mode_file(element,maximum_size,input_information_file)
-	write_icosahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_suffix,input_information_file,folder)
-	write_octahedral_cluster (element,e_coh,maximum_size,manual_mode,filename_suffix,input_information_file,folder)
-	write_decahedral_cluster (element,e_coh,maximum_size,manual_mode,filename_suffix,input_information_file,folder)
+	write_icosahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_suffix,input_information_file,folder,sort_manual_mode_by)
+	write_octahedral_cluster (element,e_coh,maximum_size,manual_mode,filename_suffix,input_information_file,folder,sort_manual_mode_by)
+	write_decahedral_cluster (element,e_coh,maximum_size,manual_mode,filename_suffix,input_information_file,folder,sort_manual_mode_by)
 	if manual_mode.lower() == 'vasp':
 		copy_VASP_files(folder,slurm_information)
 	print('Have finished making the '+str(input_information_file)+' file.')
@@ -65,7 +68,7 @@ def get_diameter(cluster):
 
 def post_creating_cluster(cluster):
 	diameter_of_cluster = get_diameter(cluster)
-	cluster.center(vacuum=diameter_of_cluster*2.0)
+	cluster.center(vacuum=diameter_of_cluster)
 	cluster.set_pbc(False)
 
 def save_cluster_to_folder(folder,name,filename_suffix,manual_mode,cluster):
@@ -75,7 +78,7 @@ def save_cluster_to_folder(folder,name,filename_suffix,manual_mode,cluster):
 	else:
 		write(folder+'/'+name+'/'+name+'.'+filename_suffix,cluster,format='xyz')
 
-def write_icosahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_suffix,input_information_file,folder):
+def write_icosahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_suffix,input_information_file,folder,sort_manual_mode_by='base details'):
 	print('============================================================')
 	print('Starting Obtaining Icosahedral Delta Energies')
 	print('no atoms\tno of shells')
@@ -103,11 +106,16 @@ def write_icosahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_su
 	print('============================================================')
 	with open(input_information_file,'a') as input_file:
 		input_file.write('Icosahedron\n')
-		all_ico_details.sort()
+		if sort_manual_mode_by == 'no of atoms':
+			all_ico_details.sort(key=lambda x:x[0])
+		elif sort_manual_mode_by == 'base details':
+			all_ico_details.sort(key=lambda x:x[1])
 		for no_atoms, noshells in all_ico_details:
-			input_file.write(str(no_atoms)+'\t'+str(noshells)+'\t\n')
+			no_atoms = str(no_atoms)
+			noshells = str(noshells)
+			input_file.write(no_atoms+' '*(atom_writing-len(no_atoms))+noshells+' '*(details_writing-len(noshells))+'\n')
 
-def write_decahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_suffix,input_information_file,folder):
+def write_decahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_suffix,input_information_file,folder,sort_manual_mode_by='base details'):
 	print('============================================================')
 	print('Starting Obtaining Decahedral Delta Energies')
 	print('no atoms\tp\tq\tr')
@@ -149,11 +157,16 @@ def write_decahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_suf
 	print('============================================================')
 	with open(input_information_file,'a') as input_file:
 		input_file.write('Decahedron\n')
-		all_deca_details.sort()
-		for no_atoms, (p, q, r) in all_deca_details:
-			input_file.write(str(no_atoms)+'\t'+str(p)+'\t'+str(q)+'\t'+str(r)+'\t\n')
+		if sort_manual_mode_by == 'no of atoms':
+			all_deca_details.sort(key=lambda x:x[0])
+		elif sort_manual_mode_by == 'base details':
+			all_deca_details.sort(key=lambda x:x[1])
+		for no_atoms, details in all_deca_details:
+			no_atoms = str(no_atoms)
+			details = '('+', '.join([str(detail) for detail in details])+')'
+			input_file.write(no_atoms+' '*(atom_writing-len(no_atoms))+details+' '*(details_writing-len(details))+'\n')
 
-def write_octahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_suffix,input_information_file,folder):
+def write_octahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_suffix,input_information_file,folder,sort_manual_mode_by='base details'):
 	def get_max_cutoff_value(length):
 		max_cutoff = (length-1.0)/2.0 - 0.5*((length-1.0)%2.0)
 		if not max_cutoff%1 == 0:
@@ -193,9 +206,14 @@ def write_octahedral_cluster(element,e_coh,maximum_size,manual_mode,filename_suf
 	print('============================================================')
 	with open(input_information_file,'a') as input_file:
 		input_file.write('Octahedron\n')
-		all_octa_details.sort()
-		for no_atoms, (length, cutoff) in all_octa_details:
-			input_file.write(str(no_atoms)+'\t'+str(length)+'\t'+str(cutoff)+'\t\n')
+		if sort_manual_mode_by == 'no of atoms':
+			all_octa_details.sort(key=lambda x:x[0])
+		elif sort_manual_mode_by == 'base details':
+			all_octa_details.sort(key=lambda x:x[1])
+		for no_atoms, details in all_octa_details:
+			no_atoms = str(no_atoms)
+			details = '('+', '.join([str(detail) for detail in details])+')'
+			input_file.write(no_atoms+' '*(atom_writing-len(no_atoms))+details+' '*(details_writing-len(details))+'\n')
 
 def copy_VASP_files(folder,slurm_information):
 	vasp_files_folder = 'VASP_Files'

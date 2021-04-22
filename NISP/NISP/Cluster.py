@@ -1,4 +1,5 @@
 from sys import exit
+from NISP.NISP.Manual_Mode import get_diameter
 
 def get_cluster(task):
 	motif, motif_details, element, local_optimiser, e_coh, no_atoms, no_of_tasks, counter = task
@@ -75,11 +76,7 @@ class Cluster:
 				print('motif = ' + str(motif))
 				import pdb; pdb.set_trace()
 				exit()
-			cluster_cell = cluster.get_cell()
-			for index in range(len(cluster_cell)):
-				if cluster_cell[index][index] == 0:
-					cluster_cell[index][index] = 1
-			cluster.set_cell(cluster_cell)
+			self.post_creating_cluster(cluster)
 			self.no_atoms = len(cluster)
 			cluster = local_optimiser(cluster)
 			if self.get_energy:
@@ -119,3 +116,17 @@ class Cluster:
 
 	def __len__(self):
 		return self.no_atoms
+
+	def post_creating_cluster(self,cluster):
+		#diameter_of_cluster = get_diameter(cluster)
+		#cluster.center(vacuum=diameter_of_cluster)
+		self.make_cell(cluster)
+		cluster.center(vacuum=10)
+		cluster.set_pbc(False)
+
+	def make_cell(self,cluster):
+			cluster_cell = cluster.get_cell()
+			for index in range(len(cluster_cell)):
+				if cluster_cell[index][index] == 0:
+					cluster_cell[index][index] = 1
+			cluster.set_cell(cluster_cell)

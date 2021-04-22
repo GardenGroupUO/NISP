@@ -77,6 +77,7 @@ class Get_Interpolation_Data_From_ASE_From_File:
 							tostring  = 'Error when inputting data from '+str(input_file)+'.\n'
 							tostring += 'One of your entries in this file was not filled in completely.\n'
 							tostring += 'Check line '+str(line_count)+' of '+str(input_file)+' and see if you have filled this in completely.\n'
+							tostring += 'Some of the other entries in you "'+str(input_file)+'" file may also be missing. Check your "'+str(input_file)+'" completely and then run NISP again.'
 							tostring += str(exception_message)
 							raise IndexError(tostring)
 						else:

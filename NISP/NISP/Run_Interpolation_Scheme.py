@@ -66,7 +66,11 @@ class Run_Interpolation_Scheme:
 			if self.local_optimiser == 'vasp':
 				self.get_slurm_information()
 			elif self.local_optimiser == 'manual mode':
-				pass
+				sort_manual_mode_by = 'sort manual mode by'
+				if sort_manual_mode_by in self.local_optimiser:
+					self.sort_manual_mode_by = self.local_optimiser[sort_manual_mode_by]
+				else:
+					self.sort_manual_mode_by = 'base details'
 
 	def get_slurm_information(self):
 		self.slurm_information = check_value('Slurm Information',self.input_information,None)
@@ -126,7 +130,7 @@ class Run_Interpolation_Scheme:
 				# Write all the files that are needed to run VASP calculations on
 				self.write_files_for_manual_or_vasp_entry('vasp',self.slurm_information)
 		elif self.local_optimiser == 'manual mode':
-			if os.path.exists(self.delta_energy_results_file):
+			if os.path.exists(self.input_information_file):
 				# If data has already been obtained, get data from file
 				self.input_from_file(self.input_information_file,True)	
 			else:
@@ -146,7 +150,7 @@ class Run_Interpolation_Scheme:
 
 	def write_files_for_manual_or_vasp_entry(self,writing_format,slurm_information):
 		from NISP.NISP.Manual_Mode import write_files_for_manual_mode
-		write_files_for_manual_mode(self.element,self.e_coh,self.maximum_size,writing_format,self.input_information_file,slurm_information=slurm_information)
+		write_files_for_manual_mode(self.element,self.e_coh,self.maximum_size,writing_format,self.input_information_file,slurm_information=slurm_information,sort_manual_mode_by=self.sort_manual_mode_by)
 
 	def input_with_calculator(self):
 		from NISP.NISP.get_interpolation_data_from_ase_calculator import get_interpolation_data_from_ase_calculator
