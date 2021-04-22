@@ -60,7 +60,7 @@ def input_from_procesed_VASP_files(element,local_optimiser,e_coh,maximum_size):
 	return ico_data, magic_numbers, octa_data, octa_magic, deca_data, deca_magic
 
 def get_VASP_energy(name):
-	path = 'VASP_Clusters/'+name+'/OUTCAR'
+	#path = 'VASP_Clusters/'+name+'/OUTCAR'
 	# do stuff # need to write
 	raise Exception('This method (get_VASP_energy in input_from_procesed_VASP_files) is still to be written, to come back to later on')
 	DFT_energy = 0.0

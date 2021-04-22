@@ -1,7 +1,7 @@
 import time
 import multiprocessing as mp
 
-from NISP.NISP.Cluster import get_cluster, Cluster
+from NISP.NISP.Cluster import get_cluster
 from NISP.NISP.motif_methods import no_of_atoms_to_make_ico
 from NISP.NISP.motif_methods import no_of_atoms_to_make_deca
 from NISP.NISP.motif_methods import no_of_atoms_to_make_octa

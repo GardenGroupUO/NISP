@@ -20,7 +20,6 @@ print('Loading Connection modules')
 from NISP.NISP.Interpolation_Connection import make_connection
 print('Loading os, timing, and multiprocessing modules')
 
-import os, time
 from sys import exit
 print('Beginning Interpolation Program')
 
@@ -74,11 +73,11 @@ class Run_Interpolation_Scheme:
 
 	def get_slurm_information(self):
 		self.slurm_information = check_value('Slurm Information',self.input_information,None)
-		if (self.slurm_information == None) or (not isinstance(self.slurm_information,dict)):
+		if (self.slurm_information is None) or (not isinstance(self.slurm_information,dict)):
 			print('=====================================================================')
 			print('Error in the Slurm Information given')
 			print()
-			if self.slurm_information == None:
+			if self.slurm_information is None:
 				print('You have not given an input for Slurm Information in the input_information dictionary.')
 				print('You need to give a dictionary that gives the information required for the submit.sl files for running VASP calculations in slurm.')
 			elif not isinstance(self.slurm_information,dict):
