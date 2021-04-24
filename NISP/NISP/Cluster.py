@@ -1,5 +1,5 @@
 from sys import exit
-from NISP.NISP.Manual_Mode import get_diameter
+#from NISP.NISP.Manual_Mode import get_diameter
 
 def get_cluster(task):
 	motif, motif_details, element, local_optimiser, e_coh, no_atoms, no_of_tasks, counter = task

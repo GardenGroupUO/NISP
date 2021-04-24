@@ -6,7 +6,7 @@
 #SBATCH --time=12:00:00     # Walltime
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=8
-#SBATCH --mem-per-cpu=500MB
+#SBATCH --mem-per-cpu=2000MB
 
 #SBATCH --output=slurmjob_%A.out
 #SBATCH --error=slurmjob_%A.err
@@ -20,4 +20,4 @@
 ######################
 
 module load Python/3.6.3-gimkl-2017a
-python Cu_Interpolation_Script.py
+python -u Cu_Interpolation_Script.py

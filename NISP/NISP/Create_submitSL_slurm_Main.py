@@ -7,7 +7,7 @@ This program is designed to create the various forms of submit.sl/mass_submit.sl
 def make_submitSL(local_path,project,time,nodes,ntasks_per_node,mem_per_cpu,partition='large',email='',vasp_version='VASP/5.4.4-intel-2017a',vasp_execution='vasp_std'):
     # create name for job
     print("creating submit.sl for "+str(local_path))
-    name = 'Getting_Lattice_Constant_Data_'+local_path.replace('/','_')
+    name = 'Getting_NISP_Data_'+local_path.replace('/','_')
     # writing the submit.sl script
     with open(local_path+"/submit.sl", "w") as submitSL:
         submitSL.write('#!/bin/bash -e\n')
