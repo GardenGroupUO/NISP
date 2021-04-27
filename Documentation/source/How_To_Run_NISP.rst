@@ -105,7 +105,7 @@ You have got to the end of all the parameter setting stuff. Now on to running NI
 	:lines: 20
 
 Output files that are created by NISP
-=====================================
+*************************************
 
 Examples of the plots that are created are shown below. The first of these is the interpolation scheme plot, which shows all the estimated energies of nanoclusters across the size range of nanoclusters that you are measuring across. An example of this for Au nanoclusters, using the RGL potetial with parameters from Baletto *et al.* (`DOI: 10.1063/1.1448484 <https://doi.org/10.1063/1.1448484>`_), is shown below:
 
