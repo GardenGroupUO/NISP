@@ -103,3 +103,20 @@ You have got to the end of all the parameter setting stuff. Now on to running NI
 	:linenos:
 	:lineno-start: 20
 	:lines: 20
+
+Output files that are created by NISP
+=====================================
+
+Examples of the plots that are created are shown below. The first of these is the interpolation scheme plot, which shows all the estimated energies of nanoclusters across the size range of nanoclusters that you are measuring across. An example of this for Au nanoclusters, using the RGL potetial with parameters from Baletto *et al.* (`DOI: 10.1063/1.1448484 <https://doi.org/10.1063/1.1448484>`_), is shown below:
+
+.. image:: results/Au_Max_Size_2000_Interpolation_Scheme.png
+   :width: 400
+   :alt: Interpolation Scheme
+
+The second plot is the same nterpolation scheme plot shown above, but with lines through it at the places that you want to obtain cluster with the particular number of atoms that you desire. 
+
+.. image:: results/Au_Max_Size_2000_Interpolation_Scheme_with_lines.png
+   :width: 400
+   :alt: Interpolation Scheme with lines
+
+There are also text documents that contain the delta energies of the various nanoclusters that you calculated, as well as instructions about how to remove atoms from certain nanoclusters in order to get icosahedral, decahedral, and octahedral nanoclusters with the particular number of atoms that you desire. `Click here to see examples of all of these plots and text files <https://github.com/GardenGroupUO/NISP/tree/main/Documentation/source/results>`_. 
