@@ -68,7 +68,11 @@ def get_diameter(cluster):
 
 def post_creating_cluster(cluster):
 	diameter_of_cluster = get_diameter(cluster)
-	cluster.center(vacuum=diameter_of_cluster)
+	radius_of_cluster = diameter_of_cluster/2.0
+	minimum_vacuum = 10.0 #Angstrom
+	vacuum = radius_of_cluster if radius_of_cluster > minimum_vacuum else minimum_vacuum
+	#vacuum *= 2.0 # same amount of vaccum about all sides of cluster.
+	cluster.center(vacuum=vacuum)
 	cluster.set_pbc(False)
 
 def save_cluster_to_folder(folder,name,filename_suffix,manual_mode,cluster):

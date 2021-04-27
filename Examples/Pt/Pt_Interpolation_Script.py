@@ -8,11 +8,11 @@ input_information['Maximum No. of Atoms'] = 1000
 input_information['Local Optimiser'] = Minimisation_Function
 
 output_information = {}
-output_information['Upper No of Atom Range']   = 450
-output_information['Lower No of Atom Range']   = 350
-output_information['Upper Delta Energy Range'] = None #2.8
-output_information['Lower Delta Energy Range'] = None #2.2
-output_information['Size to Interpolate Over'] = [37,400]#[37,38,44,55,147,40,888,1399]
+output_information['Plot upper No of atom limit']   = 450
+output_information['Plot lower No of atom limit']   = 350
+output_information['Plot upper delta energy limit'] = None
+output_information['Plot lower delta energy limit'] = None
+output_information['Sizes to obtain instructions to create clusters for'] = [37,400
 
 no_of_cpus = 1
 filename_prefix = ''

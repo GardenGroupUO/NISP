@@ -9,18 +9,17 @@
 #
 #####################################################################################
 
-print('Loading matplotlib')
+import os
+from sys import exit
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
-print('Loading the interpolation rules')
+#print('Loading the interpolation rules')
 from NISP.NISP.Interpolation_rules import Rule_deca_reent, Rule_deca_plane, Rule_deca_111
 from NISP.NISP.Interpolation_rules import Rule_octa_111, Rule_octa_fcc
 from NISP.NISP.Interpolation_rules import Rule_ico
-print('Loading Connection modules')
+#print('Loading Connection modules')
 from NISP.NISP.Interpolation_Connection import make_connection
-print('Loading os, timing, and multiprocessing modules')
 
-from sys import exit
 print('Beginning Interpolation Program')
 
 def check_value(value,plot_information,default):
@@ -37,7 +36,7 @@ class Run_Interpolation_Scheme:
 	def __init__(self,input_information,output_information={},no_of_cpus=1,filename_prefix=''):
 		self.setup_for_input_data(input_information,no_of_cpus,filename_prefix)
 		self.get_input_data()
-		self.setup_for_running_interpolation(output_information,filename_prefix)
+		self.setup_for_plotting_and_getting_data(output_information,filename_prefix)
 		self.run_interpolation()
 
 	# ------------------------------------------------------------------------------------------------------------------
@@ -62,6 +61,7 @@ class Run_Interpolation_Scheme:
 	def check_local_optimiser_entry(self):
 		if isinstance(self.local_optimiser,str):
 			self.local_optimiser = self.local_optimiser.lower()
+			self.sort_manual_mode_by='base details'
 			if self.local_optimiser == 'vasp':
 				self.get_slurm_information()
 			elif self.local_optimiser == 'manual mode':
@@ -162,26 +162,26 @@ class Run_Interpolation_Scheme:
 	# ------------------------------------------------------------------------------------------------------------------------------
 	# Set up all the inputs required to make plots and other data from the interpolation scheme
 
-	def setup_for_running_interpolation(self,output_information,filename_prefix):
+	def setup_for_plotting_and_getting_data(self,output_information,filename_prefix):
 		self.output_information = output_information
-		self.sizes_to_interpolate = check_value('Size to Interpolate Over',self.output_information,[])
-		for size_to_interpolate in self.sizes_to_interpolate:
+		self.sizes_to_create_instructions_for = check_value('Sizes to obtain instructions to create clusters for',self.output_information,[])
+		for size_to_interpolate in self.sizes_to_create_instructions_for:
 			if size_to_interpolate >= self.maximum_size:
-				print('The sizes in sizes_to_interpolate must be less than maximum_size')
-				print('sizes_to_interpolate = ' + str(self.sizes_to_interpolate))
+				print('The sizes in sizes_to_create_instructions_for must be less than maximum_size')
+				print('sizes_to_create_instructions_for = ' + str(self.sizes_to_create_instructions_for))
 				print('maximum_size = ' + str(self.maximum_size))
 				exit('')
 			if size_to_interpolate <= 0:
-				print('The sizes in sizes_to_interpolate must be greater than 0')
-				print('sizes_to_interpolate = ' + str(sizes_to_interpolate))
+				print('The sizes in sizes_to_create_instructions_for must be greater than 0')
+				print('sizes_to_create_instructions_for = ' + str(sizes_to_create_instructions_for))
 				exit('')
 		# -----------------------------------------------------------------
-		self.higherNoAtomRange = check_value('Upper No of Atom Range',  self.output_information,None) 
-		self.lowerNoAtomRange  = check_value('Lower No of Atom Range',  self.output_information,None) 
+		self.higherNoAtomRange = check_value('Plot upper No of atom limit',  self.output_information,None) 
+		self.lowerNoAtomRange  = check_value('Plot lower No of atom limit',  self.output_information,None) 
 		if self.lowerNoAtomRange is None:
 			self.lowerNoAtomRange = 0
-		self.higherDERange     = check_value('Upper Delta Energy Range',self.output_information,None) 
-		self.lowerDERange      = check_value('Lower Delta Energy Range',self.output_information,None) 
+		self.higherDERange     = check_value('Plot upper delta energy limit',self.output_information,None) 
+		self.lowerDERange      = check_value('Plot lower delta energy limit',self.output_information,None) 
 		# -----------------------------------------------------------------
 
 	# ------------------------------------------------------------------------------------------------------------------------------
@@ -314,9 +314,9 @@ class Run_Interpolation_Scheme:
 		plt.savefig(self.filename_prefix + '_Interpolation_Scheme.png')
 		plt.savefig(self.filename_prefix + '_Interpolation_Scheme.svg')
 
-		for size_to_interpolate in self.sizes_to_interpolate:
+		for size_to_interpolate in self.sizes_to_create_instructions_for:
 			ax1.axvline(x=size_to_interpolate,ymin=0,ymax=1, color='green', lw=1, linestyle='-')
-		if len(self.sizes_to_interpolate) > 0:
+		if len(self.sizes_to_create_instructions_for) > 0:
 			custom_lines.append(Line2D([0], [0], color='green', lw=1, linestyle='-'))
 			custom_names.append('Interpolation Line')
 		plt.savefig(self.filename_prefix + '_Interpolation_Scheme_with_lines.png')
@@ -325,7 +325,7 @@ class Run_Interpolation_Scheme:
 
 	def get_intersections(self):
 		print('Making interaction analysis files.')
-		for size_to_interpolate in self.sizes_to_interpolate:
+		for size_to_interpolate in self.sizes_to_create_instructions_for:
 			def get_and_write_exact_clusters(Interpolation_details,motif_data,motif):
 				exact_clusters = []
 				for cluster in motif_data:

@@ -53,11 +53,18 @@ All this information is loaded as entries into the dictionary called ``output_in
 
 The pieces of information required in ``output_information`` are:
 
-* **Upper No of Atom Range** (*int*): This is the upper size range that you would like to plot. 
-* **Lower No of Atom Range** (*int*): This is the lower size range that you would like to plot. 
-* **Upper Delta Energy Range** (*float*): This is the upper delta energy range that you would like to plot. 
-* **Lower Delta Energy Range** (*float*): This is the lower delta energy range that you would like to plot. 
-* **Size to Interpolate Over** (*list of ints*): These are all the sizes of clusters that you would like to obtain possible clusters for, including perfect, open-shell, and close-shell clusters. 
+output_information = {}
+output_information['Plot upper No of atom limit']   = None
+output_information['Plot lower No of atom limit']   = None
+output_information['Plot upper delta energy limit'] = None
+output_information['Plot lower delta energy limit'] = None
+output_information['Sizes to obtain instructions to create clusters for'] = [561,742,923]#[37,38,44,55,147,40,888,1399]
+
+* **Plot upper No of atom limit** (*int*): This is the upper size range that you would like to plot. 
+* **Plot lower No of atom limit** (*int*): This is the lower size range that you would like to plot. 
+* **Plot upper delta energy limit** (*float*): This is the upper delta energy range that you would like to plot. 
+* **Plot lower delta energy limit** (*float*): This is the lower delta energy range that you would like to plot. 
+* **Sizes to obtain instructions to create clusters for** (*list of ints*): These are all the sizes of clusters that you would like to obtain possible clusters for, including perfect, open-shell, and close-shell clusters. NISP will include text files that will include how to make all the symmetric and unsymmetric icosahedral, decahedral, and octahedral cluster that contain a particular cluster size. 
 * **Filename Prefix** (*str.*): This is the prefix of the name that you want to give to files that are create by the NISP program. This does not need to be given, as there is a default prefix given. The default filename prefix includes the element of the cluster as well as the maximum no. of atoms that the program was run up to. 
 
 An example of these parameters in ``Interpolation_Script.py`` is given below:

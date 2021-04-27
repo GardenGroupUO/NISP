@@ -20,11 +20,11 @@ slurm_information['vasp_execution'] = 'vasp_std'
 input_information['Slurm Information'] = slurm_information
 
 output_information = {}
-output_information['Upper No of Atom Range']   = None
-output_information['Lower No of Atom Range']   = None
-output_information['Upper Delta Energy Range'] = None
-output_information['Lower Delta Energy Range'] = None
-output_information['Size to Interpolate Over'] = [37,38,44,55,147,40]
+output_information['Plot upper No of atom limit']   = None
+output_information['Plot lower No of atom limit']   = None
+output_information['Plot upper delta energy limit'] = None
+output_information['Plot lower delta energy limit'] = None
+output_information['Sizes to obtain instructions to create clusters for'] = [37,38,44,55,147,40]
 
 no_of_cpus = 1
 filename_prefix = ''

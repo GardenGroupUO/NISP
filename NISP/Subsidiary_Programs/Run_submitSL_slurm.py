@@ -24,8 +24,12 @@ time_to_wait_max_queue = 60.0
 
 time_to_wait_before_next_submission_due_to_temp_submission_issue = 10.0
 number_of_consecutive_error_before_exitting = 20
+
+time_to_wait_before_next_submission_due_to_not_waiting_between_submissions = 60.0
 # ------------------------------------------------------
 
+wait_between_submissions = False
+'''
 if len(sys.argv) > 1:
     wait_between_submissions = str(sys.argv[1]).lower()
     if wait_between_submissions in ['t','true']:
@@ -40,6 +44,7 @@ if len(sys.argv) > 1:
         exit('This program will exit without running')
 else:
     wait_between_submissions = True
+'''
 
 if wait_between_submissions == True:
     print('This program will wait one minute between submitting jobs.')
@@ -86,45 +91,7 @@ def myrun(cmd):
 ###########################################################################################
 
 def get_number_to_trials_that_will_be_submitted_by_submitSL(dirpath):
-    path_to_submitSL = dirpath+'/submit.sl'
-    with open(path_to_submitSL,'r') as submitSL:
-        for line in submitSL:
-            if '#SBATCH --array=' in line:
-                trials = line.replace('#SBATCH --array=','')
-                no_of_trials_that_will_be_submitted = 0
-                worked_successfully = True
-                trial_limits_commands = trials.rstrip().split(',')
-                for trial_limits in trial_limits_commands:
-                    if trial_limits.count('-') == 1:
-                        trial_limits = trial_limits.split('-')
-                        if len(trial_limits) == 2 and trial_limits[0].isdigit() and trial_limits[1].isdigit():
-                            no_of_trials_that_will_be_submitted =+ int(trial_limits[1]) - int(trial_limits[0]) + 1
-                        else:
-                            worked_successfully = False
-                            break
-                    elif trial_limits.isdigit():
-                        no_of_trials_that_will_be_submitted += 1
-                    else:
-                        worked_successfully = False
-                        break
-                if worked_successfully:
-                    return no_of_trials_that_will_be_submitted
-                else:
-                    print('========================================================')
-                    print('Error in submitting: '+str(path_to_submitSL))
-                    print('One of the clusters in the array to be submitted is not a integer or is entered incorrectly.')
-                    print()
-                    print(line)
-                    print()
-                    print('Check this line in your submit.sl script')
-                    print('This program will now exit')
-                    exit ('========================================================')         
-    print('Error in def get_number_to_trials_that_will_be_submitted_by_submitSL, in Run_submitSl_slurm.py script, found in the folder SubsidiaryPrograms in this GA program.')
-    print('The submit.sl script found in '+str(dirpath)+' does not have the line that starts with "#SBATCH --array=" in the script.')
-    print('Just check this script to make sure everything is all good.')
-    import pdb; pdb.set_trace()
-    print('This program will finish')
-    exit()
+    return 1
 
 command = "squeue -r -u $USER"
 def check_max_jobs_in_queue_after_next_submission(dirpath):
@@ -145,32 +112,10 @@ def check_max_jobs_in_queue_after_next_submission(dirpath):
 ###########################################################################################
 ###########################################################################################
 
-# Check to make sure the array line in all submit.sl scripts is there and that none of the mass_submission script submit more than Max_jobs_in_queue_at_any_one_time
-# into the queue. 
-print('-----------------------------------------------')
-print('Checking to make sure that the array line in all submit.sl scripts is there and that none of the mass_submission script submit more than Max_jobs_in_queue_at_any_one_time into the queue.')
-for (dirpath, dirnames, filenames) in os.walk(path):
-    dirnames.sort()
-    if 'submit.sl' in filenames:
-        no_of_trials_that_will_be_submitted = get_number_to_trials_that_will_be_submitted_by_submitSL(dirpath)
-        if no_of_trials_that_will_be_submitted > Max_jobs_in_queue_at_any_one_time:
-            print('Issue: The number of Trials that you want to submit is greater the number of trials you are allowed to submit at any one time.')
-            print('Number of jobs that will be submitted by '+str(dirpath)+'/submit.sl: '+str(no_of_trials_that_will_be_submitted))
-            print('Maximum number of trials that can be submitted into slurm: '+str(Max_jobs_in_queue_at_any_one_time))
-            print('Consider doing either:')
-            print('    1) Using the scripts Create_submitSL_slurm.py and Run_submitSL_slurm.py to run your jobs. This will submit your jobs individually and has better control over submitting this large number of trials within slurm without causing issues with slurm.')
-            print('    2) Contact your slurm technical support about increasing the maximum number of jobs that can be found in the queue at any one time.')
-            print('This program will exit without doing anything.')
-            exit()
-        dirnames[:] = []
-        filenames[:] = []
-print('All clear to submit your submit.sl scripts.')
-print('-----------------------------------------------')
-print('*****************************************************************************')
-print('*****************************************************************************')
-print('Submitting submit.sl scripts to slurm.')
-
 # Time to submit all the GA scripts! Lets get this stuff going!
+if not wait_between_submissions:
+    max_consec_counter = 100
+    consec_counter = 0
 submitting_command = "sbatch submit.sl"
 for (dirpath, dirnames, filenames) in os.walk(path):
     dirnames.sort()
@@ -232,6 +177,17 @@ for (dirpath, dirnames, filenames) in os.walk(path):
             print('*****************************************************************************')
         dirnames[:] = []
         filenames[:] = []
+        if not wait_between_submissions:
+            if consec_counter >= max_consec_counter:
+                print('----------------------------------------------')
+                print('As you are not waiting between consecutive submissions, it is good practise to wait for a minute at some stage')
+                print(str(max_consec_counter) +' have been submitted consecutively. Will not wait for '+str(time_to_wait_before_next_submission_due_to_not_waiting_between_submissions)+' s before continuing')
+                print('----------------------------------------------')
+                countdown(time_to_wait_before_next_submission_due_to_not_waiting_between_submissions)
+                consec_counter = 0
+            else:
+                consec_counter += 1
+
 
 if error_counter == number_of_consecutive_error_before_exitting:
     print('----------------------------------------------')

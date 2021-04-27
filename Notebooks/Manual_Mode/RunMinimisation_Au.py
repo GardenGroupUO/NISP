@@ -12,8 +12,10 @@ def Minimisation_Function(cluster):
 	cluster.pbc = False
 	# Perform the local optimisation method on the cluster.
 	# Parameter sequence: [p, q, a, xi, r0]
-	Pt_parameters = {'Pt': [10.71, 3.845, 0.27443, 2.6209, 2.77]}
-	Gupta_parameters = Pt_parameters
+	#Au_parameters = {'Au': [10.229, 4.0360, 0.2061, 1.7900, 2.884]}
+	r0 = 4.07/(2.0 ** 0.5)
+	Au_parameters = {'Au': [10.53, 4.30, 0.2197, 1.855, r0]} # Baletto
+	Gupta_parameters = Au_parameters
 	cutoff = 1000
 	calculator = Gupta(Gupta_parameters, cutoff=cutoff, debug=False)
 	cluster.set_calculator(calculator)
