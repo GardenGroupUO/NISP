@@ -102,4 +102,4 @@ You have got to the end of all the parameter setting stuff. Now on to running NI
 Output files that are created by NISP
 *************************************
 
-The NISP program will create a number of plots and text documents when it is run. See :ref:`Examples of data that the NISP program gives <Example_data_from_NISP>`_ to see the types of plots and text documents that NISP will make. 
+The NISP program will create a number of plots and text documents when it is run. See :ref:`Examples of data that the NISP program gives <Example_data_from_NISP>` to see the types of plots and text documents that NISP will make. 
