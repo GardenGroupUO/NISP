@@ -93,21 +93,14 @@ It is recommended to read the installation page before using the NISP program. S
 Output files that are created by NISP
 =====================================
 
-Examples of the plots that are created are shown below. The first of these is the interpolation scheme plot, which shows all the estimated energies of nanoclusters across the size range of nanoclusters that you are measuring across. An example of this for Au nanoclusters, using the RGL potetial with parameters from Baletto *et al.* (`DOI: 10.1063/1.1448484 <https://doi.org/10.1063/1.1448484>`_), is shown below:
+An example of the plots that are created is the interpolation scheme plot, which shows all the estimated energies of nanoclusters across the size range of nanoclusters that you are measuring across. An example of this for Au nanoclusters, using the RGL potetial with parameters from Baletto *et al.* (`DOI: 10.1063/1.1448484 <https://doi.org/10.1063/1.1448484>`_), is shown below:
 
 .. image:: results/Au_Max_Size_2000_Interpolation_Scheme.png
    :width: 800
    :alt: Interpolation Scheme
    :align: center
 
-The second plot is the same nterpolation scheme plot shown above, but with lines through it at the places that you want to obtain cluster with the particular number of atoms that you desire. 
-
-.. image:: results/Au_Max_Size_2000_Interpolation_Scheme_with_lines.png
-   :width: 800
-   :alt: Interpolation Scheme with lines
-   :align: center
-
-There are also text documents that contain the delta energies of the various nanoclusters that you calculated, as well as instructions about how to remove atoms from certain nanoclusters in order to get icosahedral, decahedral, and octahedral nanoclusters with the particular number of atoms that you desire. `Click here to see examples of all of these plots and text files <https://github.com/GardenGroupUO/NISP/tree/main/Documentation/source/results>`_. 
+There are also other plots created by NIPS as well as other text documents that contain the delta energies of the various nanoclusters that you calculated, as well as instructions about how to remove atoms from certain nanoclusters in order to get icosahedral, decahedral, and octahedral nanoclusters with the particular number of atoms that you desire. `Click here to see examples of all of these plots and text files <https://github.com/GardenGroupUO/NISP/tree/main/Documentation/source/results>`_. 
 
 Table of Contents
 =================
@@ -122,6 +115,7 @@ Table of Contents
    How_To_VASP_In_NISP
    How_To_Manually_Enter_Energy_Results_Into_NISP
    How_to_obtain_cohesive_energies
+   What_are_delta_energies
    Examples_of_Running_NISP
    Example_data_from_NISP
    HelpfulPrograms_Subsidiary_Programs
