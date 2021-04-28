@@ -350,6 +350,9 @@ class Run_Interpolation_Scheme:
 
 			def write_connection_details(relavant_connections, motif):
 				string_to_return = ''
+				#if len(relavant_connections):
+				#	string_to_return += 'This type of structure without any atoms removed from it contains the correct number of atoms without removing any clusters from it.'
+				#else:
 				for relavant_connection in relavant_connections:
 					string_to_return += relavant_connection.__str__() + '\n'
 					start_details = relavant_connection.cluster_start.motif_details
