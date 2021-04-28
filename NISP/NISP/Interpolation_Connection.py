@@ -51,11 +51,11 @@ class Interpolation_Connection:
 			import pdb; pdb.set_trace()
 			exit()
 		#cluster_string = '-------------------------------------\n'
-		cluster_string =  'motif: ' + str(self.cluster_start.motif) + ', '
-		cluster_string += 'type_of_connection: ' + str(self.type_of_connection) + ', '
-		cluster_string += 'Remove atoms from: ' + str(removal_method) + ', '
-		cluster_string += 'motif start details: ' + str(self.cluster_start.motif_details) + ', '
-		cluster_string += 'motif end details: ' + str(self.cluster_end.motif_details) + ', '
-		cluster_string += 'interpolation energy: ' + str(self.energy) + '.'
+		cluster_string =  'motif: ' + str(self.cluster_start.motif) + '; '
+		cluster_string += 'type_of_connection: ' + str(self.type_of_connection) + '; '
+		cluster_string += 'Remove atoms from: ' + str(removal_method) + '; '
+		cluster_string += 'motif start details: ' + str(self.cluster_start.motif_details) + '; '
+		cluster_string += 'motif end details: ' + str(self.cluster_end.motif_details) + '; '
+		cluster_string += 'interpolation energy: ' + str(self.energy) + ' eV.' #' (or other appropriate energy unit based on your local optimiser).'
 		#cluster_string += '-------------------------------------\n'
 		return cluster_string
