@@ -102,7 +102,7 @@ You have got to the end of all the parameter setting stuff. Now on to running NI
 Output files that are created by NISP
 *************************************
 
-Examples of the plots that are created are shown below. The first of these is the interpolation scheme plot, which shows all the estimated energies of nanoclusters across the size range of nanoclusters that you are measuring across. An example of this for Au nanoclusters, using the RGL potetial with parameters from Baletto *et al.* (`DOI: 10.1063/1.1448484 <https://doi.org/10.1063/1.1448484>`_), is shown below:
+Examples of the plots and text document that are created by NISP can be found on Github (`click here <https://github.com/GardenGroupUO/NISP/tree/main/Documentation/source/results>`_) and are shown below. The first of these is the interpolation scheme plot, which shows all the estimated energies of nanoclusters across the size range of nanoclusters that you are measuring across. An example of this for Au nanoclusters, using the RGL potetial with parameters from Baletto *et al.* (`DOI: 10.1063/1.1448484 <https://doi.org/10.1063/1.1448484>`_), is shown below:
 
 .. image:: results/Au_Max_Size_2000_Interpolation_Scheme.png
    :width: 800
@@ -121,9 +121,8 @@ There are also a few text documents that are created by NISP. The first is a fil
 .. include:: results/Au_Max_Size_2000_atoms_interpolation_scheme_results_file.txt
    :literal:
 
-Second, a number of ``XX_Max_Size_YYYY_Clusters_interpolated_at_size_ZZZ.txt`` are generated, where ZZZ are the size of the cluster that you wanted to obtain information about how to create. These are the number of atoms that are given in ``output_information['Sizes to obtain instructions to create clusters for']`` in the ``Interpolation_Script.py`` script (see :ref:`Output information for the interpolation scheme <Output_information_for_the_interpolation_scheme>`_). These text files give the information required to create all the various symmetric and unsymmetric icosahedral, decahedral, and octahedral clusters that may have compariable energies as predicted by NISP. An example for how to make Au nanoclusters with 742 atoms, using the RGL potetial with parameters from Baletto *et al.* (`DOI: 10.1063/1.1448484 <https://doi.org/10.1063/1.1448484>`_), is shown below: 
+Second, a number of ``XX_Max_Size_YYYY_Clusters_interpolated_at_size_ZZZ.txt`` are generated, where ZZZ are the size of the cluster that you wanted to obtain information about how to create. These are the number of atoms that are given in ``output_information['Sizes to obtain instructions to create clusters for']`` in the ``Interpolation_Script.py`` script (see `Output information for the interpolation scheme <Output_information_for_the_interpolation_scheme>`_). These text files give the information required to create all the various symmetric and unsymmetric icosahedral, decahedral, and octahedral clusters that may have compariable energies as predicted by NISP. An example for how to make Au nanoclusters with 742 atoms, using the RGL potetial with parameters from Baletto *et al.* (`DOI: 10.1063/1.1448484 <https://doi.org/10.1063/1.1448484>`_), is shown below: 
 
 .. include:: results/Au_Max_Size_2000_Clusters_interpolated_at_size_742.txt
    :literal:
 
-`Click here to see examples of all of these plots and text files on Github <https://github.com/GardenGroupUO/NISP/tree/main/Documentation/source/results>`_. 
