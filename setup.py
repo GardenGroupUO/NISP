@@ -57,7 +57,7 @@ setup(name='NISP',
       install_requires=[
           'numpy','scipy','matplotlib','ase>=3.21.1',
           'Sphinx==3.5.1','sphinx-rtd-theme','sphinx-tabs','sphinxcontrib-applehelp','sphinxcontrib-devhelp',
-          'sphinxcontrib-htmlhelp','sphinxcontrib-jsmath','sphinxcontrib-plantuml==0.19','sphinxcontrib-qthelp',
+          'sphinxcontrib-htmlhelp','sphinxcontrib-jsmath','sphinxcontrib-plantuml==0.18','sphinxcontrib-qthelp',
           'sphinxcontrib-serializinghtml','sphinxcontrib-wiki'
           ],
       classifiers=[
