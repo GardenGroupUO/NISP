@@ -33,7 +33,7 @@ The pieces of information required in ``input_information`` are:
 * **Local Optimiser** (*def/str.*): This is a local optimisation method that you will locally optimise clusters with as well as their delta energies. See :ref:`Local_Minimisation_Function` for information about the local optimiser works and is written. 
 
 	* You can also use **VASP to perform DFT local optimisations** on your clusters. Do this by setting the ``'Local Optimiser'`` in ``input_information`` as ``input_information['Local Optimiser'] = 'VASP'``. See :ref:`How_To_VASP_In_NISP` to learn more about how to perform VASP calculations on clusters created using NISP. 
-	* You can also elect to **manually enter in the energies of the clusters**. To do this, enter in  ``input_information['Local Optimiser'] = 'Manual Mode'``. See :ref:`How_To_Manually_Enter_Energy_Results_Into_NISP` for more information about how to manually enter in energies for clusters into NISP. 
+	* You can also select to **manually enter in the energies of the clusters**. To do this, enter in  ``input_information['Local Optimiser'] = 'Manual Mode'``. See :ref:`How_To_Manually_Enter_Energy_Results_Into_NISP` for more information about how to manually enter in energies for clusters into NISP. 
 
 An example of these parameters in ``Interpolation_Script.py`` is given below:
 
