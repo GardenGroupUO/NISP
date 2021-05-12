@@ -1,0 +1,11 @@
+sphinx==3.5.4
+sphinx-rtd-theme
+sphinxcontrib-applehelp
+sphinxcontrib-devhelp
+sphinxcontrib-htmlhelp
+sphinxcontrib-jsmath
+sphinxcontrib-qthelp
+sphinxcontrib-serializinghtml
+sphinxcontrib-wiki
+sphinx-tabs
+sphinxcontrib-plantuml==0.18
