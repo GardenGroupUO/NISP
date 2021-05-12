@@ -4,7 +4,7 @@
 Installation: Setting Up NISP and Pre-Requisites Packages
 #########################################################
 
-In this article, we will look at how to install the genetic algorithm and all requisites for this program.
+In this article, we will look at how to install the NISP and all requisites required for this program.
 
 Pre-requisites
 ==============
@@ -226,7 +226,7 @@ where ``"<Path_to_NISP>"`` is the directory path that you place NISP (Enter in h
 
 The folder called ``Examples`` contains all the files that one would want to used to use the genetic algorithm for various metals. This includes examples of the basic run code for the genetic algorithm, the ``Interpolation_Script.py`` and ``RunMinimisation.py`` files. 
 
-NISP contains subsidiary programs that contain other program that may be useful to use when using the NISP program. This is called ``Subsidiary_Programs`` in NISP. To execute any of the programs contained within the ``Subsidiary_Programs`` folder, include the following in your ~/.bashrc:
+NISP contains subsidiary programs that contain other program that may be useful to use when using the NISP program. This is called ``Subsidiary_Programs`` in NISP. To execute any of the programs contained within the ``Subsidiary_Programs`` folder, include the following in your ``~/.bashrc``:
 
 .. code-block:: bash
 
@@ -237,7 +237,7 @@ See :ref:`Helpful Programs to run NISP <HelpfulPrograms_Subsidiary_Programs>` fo
 Other Useful things to know before you start
 --------------------------------------------
 
-You may use squeue to figure out what jobs are running in slurm. For monitoring what genetic algorithm jobs are running, I have found the following alias useful. Include the following in your ~/.bashrc (see How to execute all Trials using the JobArray Slurm Job Submission Scheme for what is going on in the below line)
+You may use squeue to figure out what jobs are running in slurm. For monitoring what genetic algorithm jobs are running, I have found the following alias useful. Include the following in your ``~/.bashrc`` (see How to execute all Trials using the JobArray Slurm Job Submission Scheme for what is going on in the below line)
 
 .. code-block:: bash
 	
