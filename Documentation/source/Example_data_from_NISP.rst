@@ -14,7 +14,7 @@ Firstly, NISP will output a series of plots and text files about various feature
   :alt: Interpolation Scheme Plot
   :align: center
 
-The second plot is the same nterpolation scheme plot shown above, but with lines through it at the places that you want to obtain cluster with the particular number of atoms that you desire. 
+The second plot is the same interpolation scheme plot shown above, but with lines through it at the places that you want to obtain cluster with the particular number of atoms that you desire. 
 
 .. image:: results/Au_Max_Size_2000_Interpolation_Scheme_with_lines.png
   :width: 700
