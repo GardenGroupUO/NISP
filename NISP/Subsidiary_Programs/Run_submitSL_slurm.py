@@ -167,14 +167,13 @@ for (dirpath, dirnames, filenames) in os.walk(path):
                     break
         if error_counter == number_of_consecutive_error_before_exitting:
             print(dirpath)
-        elif not wait_between_submissions:
-            pass # do not wait any time before proceeding to the next submission.
         else:
-            reached_max_jobs, number_in_queue = check_max_jobs_in_queue_after_next_submission(dirpath)
-            print('The number of jobs in the queue after submitting job is currently is: '+str(number_in_queue))
-            #print('Will wait for '+str(time_to_wait_max_queue)+' to give time between consecutive submissions')
-            countdown(time_to_wait_max_queue)
-            print('*****************************************************************************')
+            if wait_between_submissions:
+                reached_max_jobs, number_in_queue = check_max_jobs_in_queue_after_next_submission(dirpath)
+                print('The number of jobs in the queue after submitting job is currently is: '+str(number_in_queue))
+                #print('Will wait for '+str(time_to_wait_max_queue)+' to give time between consecutive submissions')
+                countdown(time_to_wait_max_queue)
+                print('*****************************************************************************')
         dirnames[:] = []
         filenames[:] = []
         if not wait_between_submissions:
