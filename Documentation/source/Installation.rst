@@ -135,7 +135,7 @@ This will give a bunch of information, including the location of ase on your com
 	Author: None
 	Author-email: None
 	License: LGPLv2.1+
-	Location: /Users/geoffreyweal/Library/Python/3.8/lib/python/site-packages
+	Location: /Users/geoffreyweal/Library/Python/3.6/lib/python/site-packages
 	Requires: matplotlib, scipy, numpy
 	Required-by: 
 
