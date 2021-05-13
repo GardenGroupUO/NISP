@@ -12,7 +12,7 @@ Provided in the NISP Github repository are examples of *Interpolation_Script.py*
 
 We have also developed a Jupyter notebook with some examples of various *Interpolation_Script.py* (and *RunMinimisation.py*) that you can play with and muck around with. The Github repository for this Jupyter notebook can also be found at https://github.com/GardenGroupUO/NISP. 
 
-Along with this Jupyter notebook, we have also implemented this Jupyter notebook into Binder. Binder (https://mybinder.org/) is an interactive online platform that allows you to use Jupyter notebooks on an web browser without having to set up anything. It does all the setting up on a virtual computer for you. If you want to play around with the Organisms program before you download it on your computer or if you need help when things go wrong using Organisms on your computer, Binder+Jupyter is the best way to do this. **It is recommended that you try out the Organisms program on Binder if you are interested or intending on using the Organisms program**.
+Along with this Jupyter notebook, we have also implemented this Jupyter notebook into Binder. Binder (https://mybinder.org/) is an interactive online platform that allows you to use Jupyter notebooks on an web browser without having to set up anything. It does all the setting up on a virtual computer for you. If you want to play around with the NISP program before you download it on your computer or if you need help when things go wrong using NISP on your computer, Binder+Jupyter is the best way to do this. **It is recommended that you try out the NISP program on Binder if you are interested or intending on using the NISP program**.
 
 The Binder webpage can be found at: 
 
