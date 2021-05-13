@@ -23,5 +23,3 @@ The Binder webpage can be found at:
 This will load a Binder page that will allow you to play about with NISP interactively in Binder. This Binder page may load quickly, or it may take 1 to 2 minutes to load. Don't refresh the page as Binder takes a good amount of time to load. Get a coffee or a cup of tea while you wait. 
 
 Once this is done you will see a Jupyter notebook that you can interact with. Mess around with it as much as you want!
-
-

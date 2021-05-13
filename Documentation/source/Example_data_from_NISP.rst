@@ -31,4 +31,3 @@ Second, a number of ``XX_Max_Size_YYYY_Clusters_interpolated_at_size_ZZZ.txt`` a
 
 .. include:: results/Au_Max_Size_2000_Clusters_interpolated_at_size_742.txt
    :literal:
-
