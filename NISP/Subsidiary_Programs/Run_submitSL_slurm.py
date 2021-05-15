@@ -28,8 +28,6 @@ number_of_consecutive_error_before_exitting = 20
 time_to_wait_before_next_submission_due_to_not_waiting_between_submissions = 60.0
 # ------------------------------------------------------
 
-wait_between_submissions = False
-'''
 if len(sys.argv) > 1:
     wait_between_submissions = str(sys.argv[1]).lower()
     if wait_between_submissions in ['t','true']:
@@ -43,8 +41,8 @@ if len(sys.argv) > 1:
         print('If no argument is entered, the default is given as True')
         exit('This program will exit without running')
 else:
-    wait_between_submissions = True
-'''
+    wait_between_submissions = False
+
 
 if wait_between_submissions == True:
     print('This program will wait one minute between submitting jobs.')
