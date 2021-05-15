@@ -8,7 +8,7 @@ One of the pieces of information that is needed to obtain delta energies for thi
 
 We have developed a program designed to help you to obtain the cohesive energy called LatticeFinder. You can find LatticeFinder at github.com/GardenGroupUO/LatticeFinder and documentation at latticefinder.readthedocs.io
 
-Provided in the LatticeFinder Github repository are examples of *Run_LatticeFinder.py*. Find these various examples at https://github.com/GardenGroupUO/LatticeFinder/tree/main/Examples. These examples with their accompanying results are also given in https://github.com/GardenGroupUO/LatticeFinder_Examples/tree/main/Examples
+Provided in the LatticeFinder Github repository are examples of *Run_LatticeFinder.py*. Find these various examples at https://github.com/GardenGroupUO/LatticeFinder/tree/main/Examples.
 
 We have also developed a Jupyter notebook with some examples of various *Run_LatticeFinder.py* that you can play with and muck around with. The Github repository for this Jupyter notebook can also be found at https://github.com/GardenGroupUO/LatticeFinder. 
 
