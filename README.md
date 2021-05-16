@@ -10,7 +10,7 @@
 [![Licence](https://img.shields.io/github/license/GardenGroupUO/NISP)](https://www.gnu.org/licenses/agpl-3.0.en.html)
 [![LGTM Grade](https://img.shields.io/lgtm/grade/python/github/GardenGroupUO/NISP)](https://lgtm.com/projects/g/GardenGroupUO/NISP/context:python)
 
-Authors: Dr. Anna L. Garden (University of Otago, Dunedin, New Zealand), Dr. Andreas Pedersen, and  Hannes Jónsson (University of Iceland, Reykjavík, Iceland)
+Authors in this Program on Github: Geoffrey Weal, Dr. Anna L. Garden (University of Otago, Dunedin, New Zealand), Dr. Andreas Pedersen, and  Hannes Jónsson (University of Iceland, Reykjavík, Iceland)
 
 Group pages: https://blogs.otago.ac.nz/annagarden/ , https://notendur.hi.is/hj/
 
