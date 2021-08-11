@@ -47,7 +47,7 @@ setup(name='NISP',
       description="The Nanocluster Interpolation Scheme Program (NISP) is designed to perform an interpolation scheme that gives idea of the types of perfect, closed-shell and open-shell clusters for a cluster at selected sizes.",
       long_description=get_long_description(),
       long_description_content_type='text/markdown',
-      author='Geoffrey R. Weal, Dr. Anna L. Garden, Dr. Andreas Pedersen and Prof. Hannes Jónsson',
+      author='Dr. Geoffrey R. Weal, Dr. Anna L. Garden, Dr. Andreas Pedersen and Prof. Hannes Jónsson',
       author_email='anna.garden@otago.ac.nz',
       url = 'https://blogs.otago.ac.nz/annagarden/',
       download_url = 'https://github.com/GardenGroupUO/NISP/archive/v'+str(get_version_number())+'.tar.gz',
@@ -55,7 +55,7 @@ setup(name='NISP',
       zip_safe=False,
       keywords = ['nanoclusters', 'nanoparticles', 'clusters'],
       install_requires=[
-          'numpy','scipy','matplotlib','ase>=3.21.1',
+          'numpy','scipy','matplotlib','ase>=3.21.1','packaging'
           ],
       classifiers=[
         'Development Status :: 3 - Alpha',      # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
